@@ -1,3 +1,6 @@
+import 'package:nasa_app/views/international_space_station.dart';
+import 'package:nasa_app/views/mars_rover.dart';
+import 'package:nasa_app/views/photo_of_the_day.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -5,15 +8,14 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hello Flutter',
+      title: 'Space FUN',
       theme: ThemeData(
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.orange,
       ),
-      home: MyHomePage(title: 'Hello Flutter'),
+      home: MyHomePage(title: 'Space FUN'),
     );
   }
 }
@@ -27,40 +29,41 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  String _text = " ";
-  void _changeText() {
+  final List<Widget> _pages = [Photo(), MarsRover(), InternationalSpaceStation()];
+  int _selectedIndex = 0;
+
+  void _changePage(int index) {
     setState(() {
-      _counter++;
-      if(_counter%2==0){
-        _text = " ";
-      }
-      else{
-        _text = "Welcome in Nasa App! ";
-      }
+      _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              '$_text',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            ElevatedButton(
-              onPressed: _changeText,
-              child: Icon(Icons.message_outlined),
-            ),
-          ],
-        ),
+      
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.photo_camera),
+            label: 'Photo of the day',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.center_focus_weak_rounded),
+            label: 'Mars Rovers',
+          ),
+           BottomNavigationBarItem(
+            icon: Icon(Icons.room),
+            label: 'ISS',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        onTap: _changePage,
       ),
+      body: _pages[_selectedIndex],
     );
   }
 }
