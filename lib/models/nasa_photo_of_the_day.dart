@@ -18,8 +18,8 @@ import 'package:nasa_app/models/credentials.dart';
   }
 
     
-  Future<NasaPhotoOfTheDay> getPhotoOfTheDay() async {
-    final url = Uri.https(NasaApi.apiUrl, NasaApi.pathPhotoOfTheDay, {'api_key': nasa_api_key});
+  Future<NasaPhotoOfTheDay> getPhotoOfTheDay(String dateString) async {
+    final url = Uri.https(NasaApi.apiUrl, NasaApi.pathPhotoOfTheDay, {'api_key': nasa_api_key, 'date': dateString});
     final response = await http.get(url);
     if (response.statusCode == 200) {
       final responseBody = jsonDecode(response.body);

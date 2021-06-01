@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:nasa_app/models/api_nasa.dart';
 import 'package:nasa_app/models/nasa_photo_of_the_day.dart';
+import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
@@ -18,14 +19,35 @@ class _PhotoState extends State<Photo> {
   bool descriptionIsActive = false;
   final urlOfPhoto = TextEditingController();
   final photo = NasaPhotoOfTheDay();
+  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+ DateTime selectedDate = DateTime.now();
+ String formattedDate ;
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        formattedDate = formatter.format(selectedDate);
+        selectedDate = picked;
+        loadPhoto();
+        descriptionIsActive = true;
+        getDescription();
+      });
+  }
+
   @override
   void initState() {
+    formattedDate = formatter.format(DateTime.now());
     loadPhoto();
     super.initState();
   }
 
   void loadPhoto() async {
-    await getPhotoOfTheDay().then(
+    await getPhotoOfTheDay(formattedDate).then(
       (value) => setState(() {
         title.text = value.title;
         urlOfPhoto.text = value.url;
@@ -42,7 +64,7 @@ class _PhotoState extends State<Photo> {
       }
     else {
           descriptionIsActive = true;
-     await getPhotoOfTheDay().then(
+     await getPhotoOfTheDay(formattedDate).then(
       (value) => setState(() {
         description.text = value.description;
       }),
@@ -54,8 +76,8 @@ class _PhotoState extends State<Photo> {
   void dispose() {
     title.dispose();
     urlOfPhoto.dispose();
-    super.dispose();
     description.dispose();
+    super.dispose();
   }
 
   @override
@@ -70,6 +92,11 @@ class _PhotoState extends State<Photo> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+             Text("${selectedDate.toLocal()}".split(' ')[0]),
+            SizedBox(height: 20.0,),
+            RaisedButton(
+              onPressed: () => _selectDate(context),
+              child: Text('Select date')),
             Text(
               title.text,
               style: Theme.of(context).textTheme.headline4,
