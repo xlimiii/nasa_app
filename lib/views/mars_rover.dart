@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:nasa_app/models/api_nasa.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/models/nasa_photo_of_the_day.dart';
+import 'package:nasa_app/models/nasa_rovers.dart';
 
 
 class MarsRover extends StatefulWidget {
@@ -18,9 +19,9 @@ class _MarsRoverState extends State<MarsRover> {
   }
 
   void loadRoverPhotos() async {
-    await getPhotoOfTheDay().then(
+    await getPhotoManifest("curiosity").then(
       (value) => setState(() {
-        title.text = value.toString();
+        title.text = value.name.toString();
       }),
     );
   }
@@ -40,7 +41,7 @@ class _MarsRoverState extends State<MarsRover> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'abc',
+              title.text,
               style: Theme.of(context).textTheme.headline4,
             ),
             ElevatedButton(

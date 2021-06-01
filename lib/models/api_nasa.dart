@@ -8,4 +8,5 @@ class NasaApi {
   static const apiUrl = 'api.nasa.gov';
   static const pathMarsWeather = '/insight_weather/';
   static const pathPhotoOfTheDay = '/planetary/apod';
+   static const pathRoverManifest = '/mars-photos/api/v1/manifests/';
 }
