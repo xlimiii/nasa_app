@@ -8,7 +8,6 @@ import 'package:nasa_app/widgets/main_drawer.dart';
 import 'package:nasa_app/widgets/rover_info.dart';
 import 'package:nasa_app/widgets/rover_photo_element.dart';
 
-
 class MarsRoverPhoto extends StatefulWidget {
   static const routeName = '/rovers_photo';
   final String marsRoverName;
@@ -20,114 +19,110 @@ class MarsRoverPhoto extends StatefulWidget {
 }
 
 class _MarsRoverPhotoState extends State<MarsRoverPhoto> {
-  final title = TextEditingController();
-  final landingDate = TextEditingController();
-  final status = TextEditingController();
-  int _selectedIndex = 1;
   String choosedRover = 'spirit';
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
- DateTime selectedDate = DateTime.now();
- String formattedDate ;
- List<Photos> photos = [];
+  DateTime selectedDate = DateTime.now();
+  String formattedDate;
+  List<Photos> photos = [];
 
-void _changePage(int index) {
-    setState(() {
-      _selectedIndex = index;
-      if(_selectedIndex == 0){
-        Navigator.of(context).pushReplacementNamed('/rovers');
-      }
-      else {
-        Navigator.of(context).pushReplacementNamed('/rovers_photo');
-      }
-    });
-  }
+// void _changePage(int index) {
+//     setState(() {
+//       _selectedIndex = index;
+//       if(_selectedIndex == 0){
+//         Navigator.of(context).pushReplacementNamed('/rovers');
+//       }
+//       else {
+//         Navigator.of(context).pushReplacementNamed('/rovers_photo');
+//       }
+//     });
+//   }
 
   @override
   void initState() {
-    loadRoverPhotos();
     formattedDate = formatter.format(DateTime.now());
+    loadRoverPhotos();
     super.initState();
   }
 
-  
-
-   Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
+        firstDate: DateTime(2004, 1, 5),
+        lastDate: DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day));
     if (picked != null && picked != selectedDate)
       setState(() {
-        formattedDate = formatter.format(selectedDate);
         selectedDate = picked;
+        formattedDate = formatter.format(selectedDate);
         loadRoverPhotos();
       });
   }
 
- void loadRoverPhotos() async {
-   await getPhotos(widget.marsRoverName, formattedDate).then(
-      (value) => setState(() {
-        photos = value;
-      }),
-    ); 
- }
+  void loadRoverPhotos() async {
+    await getPhotos(widget.marsRoverName, formattedDate).then(
+      (value) => {
+        if (mounted)
+          {
+            setState(() {
+              photos = value;
+            })
+          }
+      },
+    );
+  }
 
   @override
   void dispose() {
-    loadRoverPhotos();
-    title.dispose();
+    //loadRoverPhotos();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBar(
-        title: Text('Mars Rovers Photos'),
-      ),
-      drawer: MainDrawer(),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: const <BottomNavigationBarItem>[
-      //      BottomNavigationBarItem(
-      //       icon: Icon(Icons.text_snippet_outlined),
-      //       label: 'Info',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.photo_camera),
-      //       label: 'Photos',
-            
-      //     ),
-      //   ],
-      //   currentIndex: _selectedIndex,
-      //   onTap: _changePage),
-      body: new Column(
-  children: <Widget>[
-    Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget> [ 
- Text("${selectedDate.toLocal()}".split(' ')[0]),
-            SizedBox(height: 20.0,),
-            RaisedButton(
-              onPressed: () => _selectDate(context),
-              child: Text('Select date'))]),
-    new Expanded(
-      child:
-        GridView(gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 200, childAspectRatio: 3/2, crossAxisSpacing: 10, mainAxisSpacing: 10 )
-        ,
-        children: [
-            for (var i in photos)
-          RoverPhotoElement(i.imgSrc),
-        ],
+        appBar: AppBar(
+          title: Text('Mars Rovers Photos'),
         ),
-        
-      )
-  ]
-      )
-      );
-      //]),
+        drawer: MainDrawer(),
+        // bottomNavigationBar: BottomNavigationBar(
+        //   items: const <BottomNavigationBarItem>[
+        //      BottomNavigationBarItem(
+        //       icon: Icon(Icons.text_snippet_outlined),
+        //       label: 'Info',
+        //     ),
+        //     BottomNavigationBarItem(
+        //       icon: Icon(Icons.photo_camera),
+        //       label: 'Photos',
+
+        //     ),
+        //   ],
+        //   currentIndex: _selectedIndex,
+        //   onTap: _changePage),
+        body: new Column(children: <Widget>[
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            Text("${selectedDate.toLocal()}".split(' ')[0]),
+            SizedBox(
+              height: 20.0,
+            ),
+            RaisedButton(
+                onPressed: () => _selectDate(context),
+                child: Text('Select date'))
+          ]),
+          new Expanded(
+            child: GridView(
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 200,
+                  childAspectRatio: 3 / 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10),
+              children: [
+                for (var i in photos) RoverPhotoElement(i.imgSrc),
+              ],
+            ),
+          )
+        ]));
+    //]),
     //);
   }
-
 }
- 

@@ -28,7 +28,7 @@ import 'package:nasa_app/models/credentials.dart';
       final titleOfPhoto = responseBody["title"];
       final copyrightOfPhoto = responseBody["copyright"];
       final description = responseBody["explanation"];
-      final NasaPhotoOfTheDay photo = new NasaPhotoOfTheDay(title: titleOfPhoto, description: description, url: urlOfPhoto, copyright: copyrightOfPhoto);
+      final NasaPhotoOfTheDay photo = new NasaPhotoOfTheDay(title: titleOfPhoto, description: description, url: urlOfPhoto, copyright: copyrightOfPhoto, type: media_type);
       return photo;
     } else {
       throw Exception('Failed to load photo');

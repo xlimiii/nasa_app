@@ -2,10 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:nasa_app/models/api_nasa.dart';
 import 'package:nasa_app/models/nasa_photo_of_the_day.dart';
 import 'package:intl/intl.dart';
-
 import 'package:flutter/material.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
-
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Photo extends StatefulWidget {
   static const routeName = '/photos';
@@ -14,30 +13,38 @@ class Photo extends StatefulWidget {
 }
 
 class _PhotoState extends State<Photo> {
-  final title = TextEditingController();
   final description = TextEditingController();
   bool descriptionIsActive = false;
-  final urlOfPhoto = TextEditingController();
-  final photo = NasaPhotoOfTheDay();
+  NasaPhotoOfTheDay photo;
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
- DateTime selectedDate = DateTime.now();
- String formattedDate ;
+  DateTime selectedDate = DateTime.now();
+  String formattedDate;
+  YoutubePlayerController _controller = YoutubePlayerController(
+    initialVideoId: 'iLnmTe5Q2Qw',
+    flags: YoutubePlayerFlags(
+      autoPlay: true,
+      mute: true,
+    ),
+  );
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
+        firstDate: DateTime(1995, 6, 16),
+        lastDate: DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day));
     if (picked != null && picked != selectedDate)
       setState(() {
-        formattedDate = formatter.format(selectedDate);
         selectedDate = picked;
+        formattedDate = formatter.format(selectedDate);
         loadPhoto();
         descriptionIsActive = true;
         getDescription();
       });
   }
+
+
 
   @override
   void initState() {
@@ -49,33 +56,35 @@ class _PhotoState extends State<Photo> {
   void loadPhoto() async {
     await getPhotoOfTheDay(formattedDate).then(
       (value) => setState(() {
-        title.text = value.title;
-        urlOfPhoto.text = value.url;
+        photo = value;
+        if (photo.type == "video") {
+          _controller.reset();
+          _controller = YoutubePlayerController(
+              initialVideoId: YoutubePlayer.convertUrlToId(photo.url),
+              flags: YoutubePlayerFlags(
+                autoPlay: true,
+                mute: true,
+              ));
+        }
       }),
     );
   }
+
   void getDescription() async {
-    if (descriptionIsActive == true){
+    if (descriptionIsActive == true) {
       description.text = " ";
-      descriptionIsActive = false; 
+      descriptionIsActive = false;
+    } else {
       setState(() {
-        description.text = " ";
+        description.text = photo.description;
       });
-      }
-    else {
-          descriptionIsActive = true;
-     await getPhotoOfTheDay(formattedDate).then(
-      (value) => setState(() {
-        description.text = value.description;
-      }),
-    );
-  }
+      descriptionIsActive = true;
+    }
   }
 
   @override
   void dispose() {
-    title.dispose();
-    urlOfPhoto.dispose();
+    _controller.dispose();
     description.dispose();
     super.dispose();
   }
@@ -83,38 +92,47 @@ class _PhotoState extends State<Photo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         title: Text('NASA Photo of the Day'),
       ),
       drawer: MainDrawer(),
-      body: 
-      SingleChildScrollView(child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-             Text("${selectedDate.toLocal()}".split(' ')[0]),
-            SizedBox(height: 20.0,),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            Text("${selectedDate.toLocal()}".split(' ')[0]),
+            SizedBox(
+              height: 20.0,
+            ),
             RaisedButton(
-              onPressed: () => _selectDate(context),
-              child: Text('Select date')),
-            Text(
-              title.text,
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Image.network(urlOfPhoto.text),
-            ElevatedButton(
-              onPressed: getDescription,
-              child: Icon(Icons.message_outlined),
-            ),
-             Text(
-              description.text,
-              style: Theme.of(context).textTheme.bodyText2,
-            ),
-          ],
+                onPressed: () => _selectDate(context),
+                child: Text('Select date'))
+          ]),
+              Text(
+                photo.title,
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              Center(
+                child: photo.type.isNotEmpty && photo.type != "video"
+                    ? Image.network(photo.url)
+                    : YoutubePlayer(
+                        controller: _controller,
+                        liveUIColor: Colors.amber,
+                      ),
+              ),
+              ElevatedButton(
+                onPressed: getDescription,
+                child: Icon(Icons.message_outlined),
+              ),
+              Text(
+                description.text,
+                style: Theme.of(context).textTheme.bodyText2,
+              ),
+            ],
+          ),
         ),
-      ),),
-      
+      ),
     );
   }
 }
- 
