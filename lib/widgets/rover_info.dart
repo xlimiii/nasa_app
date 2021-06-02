@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:nasa_app/arguments.dart';
+import 'package:nasa_app/views/mars_rovers_photo.dart';
 
 class RoverInfo extends StatelessWidget {
   RoverInfo(
@@ -18,9 +20,21 @@ class RoverInfo extends StatelessWidget {
   final String totalPhotos;
   final String lastPhoto;
 
+void selectRover(BuildContext context){
+   Navigator.of(context).pushNamed(MarsRoverPhoto.routeName, arguments: Arguments(nameOfRover) ); }
+
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    final Arguments args = ModalRoute.of(context).settings.arguments;
+
+    return new 
+    InkWell( 
+      onTap: () {
+        selectRover(context);
+      },
+      child:
+    Container(
+      
         margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         decoration: BoxDecoration(
           color: const Color(0xffffff4c),
@@ -64,6 +78,7 @@ class RoverInfo extends StatelessWidget {
               Text('Last Photo: ' + lastPhoto, textAlign: TextAlign.end,)
             ])
             )],
+        ), 
         ));
   }
 }

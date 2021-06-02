@@ -1,3 +1,4 @@
+import 'package:nasa_app/arguments.dart';
 import 'package:nasa_app/views/international_space_station.dart';
 import 'package:nasa_app/views/mars_rover.dart';
 import 'package:nasa_app/views/mars_rovers_photo.dart';
@@ -17,13 +18,24 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.orange,
       ),
-      
+      onGenerateRoute: (settings) {
+          if (settings.name == MarsRoverPhoto.routeName) {
+            final Arguments args = settings.arguments;
+            return MaterialPageRoute(
+              builder: (context) {
+                return MarsRoverPhoto(args.nameOfRover);
+              },
+            );
+          }
+          assert(false, 'Implementation ${settings.name}');
+          return null;
+        },
      //home: MyHomePage(title: 'Space FUN'),
      routes: {
        '/': (ctx) => MyHomePage(title: 'Space FUN'),
        InternationalSpaceStation.routeName: (ctx) => InternationalSpaceStation(),
        MarsRover.routeName: (ctx) => MarsRover(),
-       MarsRoverPhoto.routeName: (ctx) => MarsRoverPhoto(),
+      // MarsRoverPhoto.routeName: (ctx) => MarsRoverPhoto(),
        Photo.routeName: (ctx) => Photo()
      }
     );
@@ -79,3 +91,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+

@@ -11,6 +11,10 @@ import 'package:nasa_app/widgets/rover_photo_element.dart';
 
 class MarsRoverPhoto extends StatefulWidget {
   static const routeName = '/rovers_photo';
+  final String marsRoverName;
+
+  MarsRoverPhoto(this.marsRoverName);
+
   @override
   _MarsRoverPhotoState createState() => _MarsRoverPhotoState();
 }
@@ -62,7 +66,7 @@ void _changePage(int index) {
   }
 
  void loadRoverPhotos() async {
-   await getPhotos('curiosity', formattedDate).then(
+   await getPhotos(widget.marsRoverName, formattedDate).then(
       (value) => setState(() {
         photos = value;
       }),
@@ -83,20 +87,20 @@ void _changePage(int index) {
         title: Text('Mars Rovers Photos'),
       ),
       drawer: MainDrawer(),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-           BottomNavigationBarItem(
-            icon: Icon(Icons.text_snippet_outlined),
-            label: 'Info',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.photo_camera),
-            label: 'Photos',
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: const <BottomNavigationBarItem>[
+      //      BottomNavigationBarItem(
+      //       icon: Icon(Icons.text_snippet_outlined),
+      //       label: 'Info',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.photo_camera),
+      //       label: 'Photos',
             
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _changePage),
+      //     ),
+      //   ],
+      //   currentIndex: _selectedIndex,
+      //   onTap: _changePage),
       body: new Column(
   children: <Widget>[
     Row(
@@ -109,15 +113,6 @@ void _changePage(int index) {
               child: Text('Select date'))]),
     new Expanded(
       child:
-      // Column( 
-      //   children: <Widget>[
-            // Text("${selectedDate.toLocal()}".split(' ')[0]),
-            // SizedBox(height: 20.0,),
-            // RaisedButton(
-            //   onPressed: () => _selectDate(context),
-            //   child: Text('Select date')),
-      //  Center(
-      //   child: 
         GridView(gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 200, childAspectRatio: 3/2, crossAxisSpacing: 10, mainAxisSpacing: 10 )
         ,
         children: [

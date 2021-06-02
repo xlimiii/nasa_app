@@ -7,6 +7,7 @@ import 'package:nasa_app/widgets/main_drawer.dart';
 import 'package:nasa_app/widgets/rover_info.dart';
 
 
+
 class MarsRover extends StatefulWidget {
   static const routeName = '/rovers';
   @override
@@ -29,7 +30,7 @@ void _changePage(int index) {
         Navigator.of(context).pushReplacementNamed('/rovers');
       }
       else {
-        Navigator.of(context).pushReplacementNamed('/rovers_photo');
+        Navigator.of(context).pushReplacementNamed('/rovers_photo', arguments: choosedRover);
       }
     });
   }
@@ -43,7 +44,8 @@ void _changePage(int index) {
     super.initState();
   }
 
- 
+
+
  void loadRoverInfo() async {
    await getPhotoManifest(choosedRover).then(
       (value) => setState(() {
@@ -64,20 +66,20 @@ void _changePage(int index) {
         title: Text('Mars Rovers'),
       ),
       drawer: MainDrawer(),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-           BottomNavigationBarItem(
-            icon: Icon(Icons.text_snippet_outlined),
-            label: 'Info',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.photo_camera),
-            label: 'Photos',
+      // bottomNavigationBar: BottomNavigationBar(
+      //   items: const <BottomNavigationBarItem>[
+      //      BottomNavigationBarItem(
+      //       icon: Icon(Icons.text_snippet_outlined),
+      //       label: 'Info',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(Icons.photo_camera),
+      //       label: 'Photos',
             
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _changePage),
+      //     ),
+      //   ],
+      //   currentIndex: _selectedIndex,
+      //   onTap: _changePage),
       body:  SingleChildScrollView(child:Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -85,7 +87,7 @@ void _changePage(int index) {
             for ( var i in roverObjects )
            
             RoverInfo(nameOfRover: i.name, landingDate: i.landingDate, lastPhoto: i.maxDate, launchDate: i.launchDate, status: i.status, totalPhotos: i.totalPhotos.toString() ),
-
+           
            
           ],
         ),
