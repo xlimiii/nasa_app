@@ -1,5 +1,6 @@
 import 'package:nasa_app/views/international_space_station.dart';
 import 'package:nasa_app/views/mars_rover.dart';
+import 'package:nasa_app/views/mars_rovers_photo.dart';
 import 'package:nasa_app/views/photo_of_the_day.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
        '/': (ctx) => MyHomePage(title: 'Space FUN'),
        InternationalSpaceStation.routeName: (ctx) => InternationalSpaceStation(),
        MarsRover.routeName: (ctx) => MarsRover(),
+       MarsRoverPhoto.routeName: (ctx) => MarsRoverPhoto(),
        Photo.routeName: (ctx) => Photo()
      }
     );

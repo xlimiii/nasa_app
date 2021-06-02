@@ -7,20 +7,18 @@ import 'package:nasa_app/widgets/main_drawer.dart';
 import 'package:nasa_app/widgets/rover_info.dart';
 
 
-class MarsRover extends StatefulWidget {
-  static const routeName = '/rovers';
+class MarsRoverPhoto extends StatefulWidget {
+  static const routeName = '/rovers_photo';
   @override
-  _MarsRoverState createState() => _MarsRoverState();
+  _MarsRoverPhotoState createState() => _MarsRoverPhotoState();
 }
 
-class _MarsRoverState extends State<MarsRover> {
+class _MarsRoverPhotoState extends State<MarsRoverPhoto> {
   final title = TextEditingController();
   final landingDate = TextEditingController();
   final status = TextEditingController();
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   String choosedRover = 'spirit';
-  final rovers = ['spirit', 'opportunity', 'perseverance', 'curiosity'];
-   List<PhotoManifest> laziki = []; 
 
 void _changePage(int index) {
     setState(() {
@@ -36,24 +34,29 @@ void _changePage(int index) {
 
   @override
   void initState() {
-    for (var i in rovers){
-    choosedRover = i;
-    loadRoverInfo();
-    }
     super.initState();
   }
 
- 
+  void loadRoverPhotos() async {
+    await getPhotoManifest("curiosity").then(
+      (value) => setState(() {
+        title.text = value.name.toString();
+      }),
+    );
+  }
  void loadRoverInfo() async {
    await getPhotoManifest(choosedRover).then(
       (value) => setState(() {
-        laziki.add(value);
+        title.text = value.name.toString();
+        landingDate.text = value.landingDate.toString();
+        status.text = value.status.toString();
       }),
     ); 
  }
 
   @override
   void dispose() {
+    title.dispose();
     super.dispose();
   }
 
@@ -61,7 +64,7 @@ void _changePage(int index) {
   Widget build(BuildContext context) {
     return Scaffold(
      appBar: AppBar(
-        title: Text('Mars Rovers'),
+        title: Text('Mars Rovers Photos'),
       ),
       drawer: MainDrawer(),
       bottomNavigationBar: BottomNavigationBar(
@@ -78,14 +81,10 @@ void _changePage(int index) {
         ],
         currentIndex: _selectedIndex,
         onTap: _changePage),
-      body:  SingleChildScrollView(child:Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            for ( var i in laziki )
-           
-            RoverInfo(nameOfRover: i.name, landingDate: i.landingDate, lastPhoto: i.maxDate, launchDate: i.launchDate, status: i.status, totalPhotos: i.totalPhotos.toString() ),
-            
             DropdownButton(  
                value: choosedRover,
                onChanged: (newValue) {
@@ -97,6 +96,8 @@ void _changePage(int index) {
             items: <String>['spirit', 'opportunity', 'perseverance', 'curiosity'].map((String value){
               return new DropdownMenuItem<String>(value: value, child: new Text(value));
             }).toList(),),
+           
+
             Text(
               title.text,
               style: Theme.of(context).textTheme.headline4,
@@ -111,7 +112,7 @@ void _changePage(int index) {
             ),
           ],
         ),
-      ),)
+      ),
     );
   }
 
