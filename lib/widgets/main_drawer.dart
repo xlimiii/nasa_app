@@ -39,7 +39,7 @@ class MainDrawer extends StatelessWidget {
       )
       ),
       onTap: () {
-        Navigator.of(context).pushReplacementNamed('/iss');
+        Navigator.of(context).pushReplacementNamed('/iss_people');
       },
       ),
     ]

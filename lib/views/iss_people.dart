@@ -5,15 +5,16 @@ import 'package:nasa_app/models/iss_people.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 
 
-class InternationalSpaceStation extends StatefulWidget {
-    static const routeName = '/iss';
+class ISSPeople extends StatefulWidget {
+ static const routeName = '/iss_people';
   @override
-  _InternationalSpaceStationState createState() => _InternationalSpaceStationState();
+  _ISSPeopleState createState() => _ISSPeopleState();
 }
 
-class _InternationalSpaceStationState extends State<InternationalSpaceStation> {
+class _ISSPeopleState extends State<ISSPeople> {
   final title = TextEditingController();
   List<ISSPerson> peopleInSpace = [] ;
+  int _selectedIndex = 0;
   @override
   void initState() {
     super.initState();
@@ -28,6 +29,17 @@ class _InternationalSpaceStationState extends State<InternationalSpaceStation> {
     );
   }
 
+void _changePage(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if(_selectedIndex == 0){
+        Navigator.of(context).pushReplacementNamed('/iss_people');
+      }
+      else {
+        Navigator.of(context).pushReplacementNamed('/iss_loc');
+      }
+    });
+  }
 
   @override
   void dispose() {
@@ -42,7 +54,20 @@ class _InternationalSpaceStationState extends State<InternationalSpaceStation> {
         title: Text('People at ISS'),
       ),
       drawer: MainDrawer(),
-     
+     bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+             BottomNavigationBarItem(
+              icon: Icon(Icons.people),
+              label: 'People at ISS',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.pin_drop),
+              label: 'Where is ISS',
+
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          onTap: _changePage),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

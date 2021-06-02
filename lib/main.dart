@@ -1,5 +1,6 @@
 import 'package:nasa_app/arguments.dart';
-import 'package:nasa_app/views/international_space_station.dart';
+import 'package:nasa_app/views/iss_localization.dart';
+import 'package:nasa_app/views/iss_people.dart';
 import 'package:nasa_app/views/mars_rover.dart';
 import 'package:nasa_app/views/mars_rovers_photo.dart';
 import 'package:nasa_app/views/photo_of_the_day.dart';
@@ -33,8 +34,10 @@ class MyApp extends StatelessWidget {
      //home: MyHomePage(title: 'Space FUN'),
      routes: {
        '/': (ctx) => MyHomePage(title: 'Space FUN'),
-       InternationalSpaceStation.routeName: (ctx) => InternationalSpaceStation(),
-       MarsRover.routeName: (ctx) => MarsRover(),
+       ISSPeople.routeName: (ctx) => ISSPeople(),
+      
+       ISSLocalization.routeName: (ctx) => ISSLocalization(),
+        MarsRover.routeName: (ctx) => MarsRover(),
       // MarsRoverPhoto.routeName: (ctx) => MarsRoverPhoto(),
        Photo.routeName: (ctx) => Photo()
      }
@@ -51,7 +54,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Widget> _pages = [Photo(), MarsRover(), InternationalSpaceStation()];
+  final List<Widget> _pages = [Photo(), MarsRover(), ISSPeople()];
   int _selectedIndex = 0;
 
   void _changePage(int index) {
