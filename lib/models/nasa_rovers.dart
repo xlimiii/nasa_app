@@ -93,3 +93,4 @@ class Photos {
     } else {
       throw Exception('Failed to load photo');
     }}
+

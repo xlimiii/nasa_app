@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 import 'package:nasa_app/models/api_nasa.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/models/nasa_photo_of_the_day.dart';
-import 'package:nasa_app/models/nasa_rovers.dart';
+import 'package:nasa_app/models/nasa_rovers_photos.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 import 'package:nasa_app/widgets/rover_info.dart';
+import 'package:nasa_app/widgets/rover_photo_element.dart';
 
 
 class MarsRoverPhoto extends StatefulWidget {
@@ -19,6 +21,10 @@ class _MarsRoverPhotoState extends State<MarsRoverPhoto> {
   final status = TextEditingController();
   int _selectedIndex = 1;
   String choosedRover = 'spirit';
+  final DateFormat formatter = DateFormat('yyyy-MM-dd');
+ DateTime selectedDate = DateTime.now();
+ String formattedDate ;
+ List<Photos> photos = [];
 
 void _changePage(int index) {
     setState(() {
@@ -34,28 +40,38 @@ void _changePage(int index) {
 
   @override
   void initState() {
+    loadRoverPhotos();
+    formattedDate = formatter.format(DateTime.now());
     super.initState();
   }
 
-  void loadRoverPhotos() async {
-    await getPhotoManifest("curiosity").then(
-      (value) => setState(() {
-        title.text = value.name.toString();
-      }),
-    );
+  
+
+   Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        formattedDate = formatter.format(selectedDate);
+        selectedDate = picked;
+        loadRoverPhotos();
+      });
   }
- void loadRoverInfo() async {
-   await getPhotoManifest(choosedRover).then(
+
+ void loadRoverPhotos() async {
+   await getPhotos('curiosity', formattedDate).then(
       (value) => setState(() {
-        title.text = value.name.toString();
-        landingDate.text = value.landingDate.toString();
-        status.text = value.status.toString();
+        photos = value;
       }),
     ); 
  }
 
   @override
   void dispose() {
+    loadRoverPhotos();
     title.dispose();
     super.dispose();
   }
@@ -81,39 +97,41 @@ void _changePage(int index) {
         ],
         currentIndex: _selectedIndex,
         onTap: _changePage),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            DropdownButton(  
-               value: choosedRover,
-               onChanged: (newValue) {
-              setState(() {
-                choosedRover = newValue;
-              });
-              loadRoverInfo();
-            }, 
-            items: <String>['spirit', 'opportunity', 'perseverance', 'curiosity'].map((String value){
-              return new DropdownMenuItem<String>(value: value, child: new Text(value));
-            }).toList(),),
-           
-
-            Text(
-              title.text,
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Text(
-              landingDate.text,
-              style: Theme.of(context).textTheme.headline4,
-            ),
-             Text(
-              status.text,
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      body: new Column(
+  children: <Widget>[
+    Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget> [ 
+ Text("${selectedDate.toLocal()}".split(' ')[0]),
+            SizedBox(height: 20.0,),
+            RaisedButton(
+              onPressed: () => _selectDate(context),
+              child: Text('Select date'))]),
+    new Expanded(
+      child:
+      // Column( 
+      //   children: <Widget>[
+            // Text("${selectedDate.toLocal()}".split(' ')[0]),
+            // SizedBox(height: 20.0,),
+            // RaisedButton(
+            //   onPressed: () => _selectDate(context),
+            //   child: Text('Select date')),
+      //  Center(
+      //   child: 
+        GridView(gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 200, childAspectRatio: 3/2, crossAxisSpacing: 10, mainAxisSpacing: 10 )
+        ,
+        children: [
+            for (var i in photos)
+          RoverPhotoElement(i.imgSrc),
+        ],
         ),
-      ),
-    );
+        
+      )
+  ]
+      )
+      );
+      //]),
+    //);
   }
 
 }

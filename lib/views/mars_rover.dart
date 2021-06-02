@@ -19,8 +19,8 @@ class _MarsRoverState extends State<MarsRover> {
   final status = TextEditingController();
   int _selectedIndex = 0;
   String choosedRover = 'spirit';
-  final rovers = ['spirit', 'opportunity', 'perseverance', 'curiosity'];
-   List<PhotoManifest> laziki = []; 
+  final roverNames = ['spirit', 'opportunity', 'perseverance', 'curiosity'];
+   List<PhotoManifest> roverObjects = []; 
 
 void _changePage(int index) {
     setState(() {
@@ -36,7 +36,7 @@ void _changePage(int index) {
 
   @override
   void initState() {
-    for (var i in rovers){
+    for (var i in roverNames){
     choosedRover = i;
     loadRoverInfo();
     }
@@ -47,7 +47,7 @@ void _changePage(int index) {
  void loadRoverInfo() async {
    await getPhotoManifest(choosedRover).then(
       (value) => setState(() {
-        laziki.add(value);
+        roverObjects.add(value);
       }),
     ); 
  }
@@ -82,33 +82,11 @@ void _changePage(int index) {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            for ( var i in laziki )
+            for ( var i in roverObjects )
            
             RoverInfo(nameOfRover: i.name, landingDate: i.landingDate, lastPhoto: i.maxDate, launchDate: i.launchDate, status: i.status, totalPhotos: i.totalPhotos.toString() ),
-            
-            DropdownButton(  
-               value: choosedRover,
-               onChanged: (newValue) {
-              setState(() {
-                choosedRover = newValue;
-              });
-              loadRoverInfo();
-            }, 
-            items: <String>['spirit', 'opportunity', 'perseverance', 'curiosity'].map((String value){
-              return new DropdownMenuItem<String>(value: value, child: new Text(value));
-            }).toList(),),
-            Text(
-              title.text,
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Text(
-              landingDate.text,
-              style: Theme.of(context).textTheme.headline4,
-            ),
-             Text(
-              status.text,
-              style: Theme.of(context).textTheme.headline4,
-            ),
+
+           
           ],
         ),
       ),)
