@@ -20,7 +20,7 @@ class _PhotoState extends State<Photo> {
   DateTime selectedDate = DateTime.now();
   String formattedDate;
   YoutubePlayerController _controller = YoutubePlayerController(
-    initialVideoId: 'iLnmTe5Q2Qw',
+    initialVideoId: '',
     flags: YoutubePlayerFlags(
       autoPlay: true,
       mute: true,
@@ -43,8 +43,6 @@ class _PhotoState extends State<Photo> {
         getDescription();
       });
   }
-
-
 
   @override
   void initState() {
@@ -110,16 +108,17 @@ class _PhotoState extends State<Photo> {
                 child: Text('Select date'))
           ]),
               Text(
-                photo.title,
+                photo == null ? ' ' : photo.title, 
                 style: Theme.of(context).textTheme.headline4,
               ),
               Center(
-                child: photo.type.isNotEmpty && photo.type != "video"
+                child: photo == null ? Container() :
+                (photo.type != "video"
                     ? Image.network(photo.url)
-                    : YoutubePlayer(
+                    : (YoutubePlayer(
                         controller: _controller,
                         liveUIColor: Colors.amber,
-                      ),
+                      ))),
               ),
               ElevatedButton(
                 onPressed: getDescription,

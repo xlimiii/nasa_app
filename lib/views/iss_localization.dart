@@ -21,6 +21,9 @@ class _ISSLocalizationState extends State<ISSLocalization> {
 
   LatLng _center;
   Timer timer;
+
+
+
   void _onMapCreated(GoogleMapController controller) {
     _controller.complete(controller);
   }
@@ -37,6 +40,7 @@ class _ISSLocalizationState extends State<ISSLocalization> {
       (value) => { if (mounted)
           {setState(() {
         _center = LatLng(double.parse(value.issPosition.latitude), double.parse(value.issPosition.longitude));
+         
       })}},
     );
 
@@ -84,12 +88,13 @@ void _changePage(int index) {
           currentIndex: _selectedIndex,
           onTap: _changePage),
       body: 
+      _center == null ? Container() :
 GoogleMap(
           mapType: MapType.normal,
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
             target: _center,
-            zoom: 10,
+            zoom: 2,
           )),
          
         
