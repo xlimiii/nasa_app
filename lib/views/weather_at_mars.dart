@@ -18,6 +18,8 @@ class WeatherAtMars extends StatefulWidget {
 
 class _WeatherAtMars extends State<WeatherAtMars> {
   List<Sole> soles = [];
+  double _value = 4;
+  double max =10;
 
   @override
   void initState() {
@@ -27,7 +29,8 @@ class _WeatherAtMars extends State<WeatherAtMars> {
 
   void loadWeatherAtMars() async {
     await getWeatherManifest()
-        .then((value) => {setState(() => soles = value.soles)});
+        .then((value) => {setState(() => {soles = value.soles,
+        max=soles.length.toDouble()-4})});
   }
 
   @override
@@ -59,15 +62,18 @@ class _WeatherAtMars extends State<WeatherAtMars> {
                 style: TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
-              Text(subtitle,
-                textAlign: TextAlign.center,),
-
+              Text(
+                subtitle,
+                textAlign: TextAlign.center,
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,29 +82,67 @@ class _WeatherAtMars extends State<WeatherAtMars> {
         title: Text('Weather'),
       ),
       drawer: MainDrawer(),
-      body: ListView.builder(
-        itemCount: soles.length,
-        itemBuilder: (context, index) {
-          return Card(
-            child: InkWell(
-              onTap: () {
-                print('tapped');
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                  children: <Widget>[
-                    column('Sol', soles[index].sol),
-                    column('Max \nTemp', soles[index].maxTemp),
-                    column('Min \nTemp', soles[index].minTemp),
-                    column('Sunset', soles[index].sunset),
-                    column('Sunrise', soles[index].sunrise),
-                  ],
-                ),
+      body: new Container(
+        color: Color(0xff258DED),
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            SliderTheme(
+              data: SliderTheme.of(context).copyWith(
+                activeTrackColor: Colors.red[700],
+                inactiveTrackColor: Colors.red[100],
+                trackShape: RoundedRectSliderTrackShape(),
+                trackHeight: 4.0,
+                thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
+                thumbColor: Colors.redAccent,
+                overlayColor: Colors.red.withAlpha(32),
+                overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
+                tickMarkShape: RoundSliderTickMarkShape(),
+                activeTickMarkColor: Colors.red[700],
+                inactiveTickMarkColor: Colors.red[100],
+              ),
+              child: Slider(
+                value: _value,
+                min: 1,
+                max:  max,
+                divisions: (max/4).toInt(),
+                onChanged: (value) {
+                  setState(
+                    () {
+                      _value = value.round().toDouble();
+                    },
+                  );
+                },
               ),
             ),
-          );
-        },
+            ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: 4,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: InkWell(
+                    onTap: () {
+                      print('tapped');
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child:(){ if(soles.length-index-_value.toInt()<soles.length &&soles.length-index-_value.toInt()>0) {return Row(
+                        children: <Widget>[
+                            column('Sol', soles[soles.length-index-_value.toInt()].sol),
+                            column('Min \nTemp', soles[soles.length-index-_value.toInt()].minTemp),
+                            column('Max \nTemp', soles[soles.length-index-_value.toInt()].maxTemp),
+                            column('Sunrise', soles[soles.length-index-_value.toInt()].sunrise),
+                            column('Sunset', soles[soles.length-index-_value.toInt()].sunset),
+                        ],
+                      );}}()
+                    ),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
