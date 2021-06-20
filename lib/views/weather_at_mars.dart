@@ -9,7 +9,6 @@ import 'package:nasa_app/models/iss_people.dart';
 import 'package:nasa_app/models/weather_at_mars.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 
-
 class WeatherAtMars extends StatefulWidget {
   static const routeName = '/weather_at_mars';
 
@@ -18,7 +17,6 @@ class WeatherAtMars extends StatefulWidget {
 }
 
 class _WeatherAtMars extends State<WeatherAtMars> {
-
   List<Sole> soles = [];
 
   @override
@@ -28,41 +26,60 @@ class _WeatherAtMars extends State<WeatherAtMars> {
   }
 
   void loadWeatherAtMars() async {
-    await getWeatherManifest().then(
-            (value) =>
-        {
-          soles = value.soles});
+    await getWeatherManifest()
+        .then((value) => {setState(() => soles = value.soles)});
   }
-
 
   @override
   void dispose() {
     super.dispose();
   }
 
-  Widget column (String Title, String subtitle) {
-  return Expanded(
-    child: Column(
-      // align the text to the left instead of centered
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(Title, style: TextStyle(fontSize: 16),),
-        Text(subtitle),
-      ],
-    ),
-  );}
+  Widget column(String Title, String subtitle) {
+    return Expanded(
+      child: Card(
+        color: Colors.grey,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(60),
+          // if you need this
+          side: BorderSide(
+            color: Colors.grey.withOpacity(0.2),
+            width: 1.5,
+          ),
+        ),
+        child: Container(
+          width: 50,
+          height: 60,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                Title,
+                style: TextStyle(fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+              Text(subtitle,
+                textAlign: TextAlign.center,),
+
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
-      title: Text('Weather'),
-    ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Weather'),
+      ),
       drawer: MainDrawer(),
       body: ListView.builder(
         itemCount: soles.length,
         itemBuilder: (context, index) {
           return Card(
-
             child: InkWell(
               onTap: () {
                 print('tapped');
@@ -71,11 +88,11 @@ class _WeatherAtMars extends State<WeatherAtMars> {
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
                   children: <Widget>[
-                    column('Sol',soles[index].sol),
-                    column('Max \nTemp',soles[index].maxTemp),
-                    column('Min \nTemp',soles[index].minTemp),
-                    column('Sunset',soles[index].sunset),
-                    column('Sunrise',soles[index].sunrise),
+                    column('Sol', soles[index].sol),
+                    column('Max \nTemp', soles[index].maxTemp),
+                    column('Min \nTemp', soles[index].minTemp),
+                    column('Sunset', soles[index].sunset),
+                    column('Sunrise', soles[index].sunrise),
                   ],
                 ),
               ),
@@ -86,4 +103,3 @@ class _WeatherAtMars extends State<WeatherAtMars> {
     );
   }
 }
-
