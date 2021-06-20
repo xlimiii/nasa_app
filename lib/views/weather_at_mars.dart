@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:nasa_app/models/api_nasa.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/models/iss_people.dart';
+import 'package:nasa_app/models/weather_at_mars.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 
 
@@ -21,12 +24,12 @@ class _WeatherAtMars extends State<WeatherAtMars> {
   }
 
   void loadWeatherAtMars() async {
-    await getPeopleAtISS().then(
-          (value) => setState(() {
-        title.text = value.people[0].name;
-        peopleInSpace = value.people;
-      }),
-    );
+    await getWeatherManifest().then(
+          (value) => {
+            stderr.writeln(value)
+
+      });
+
   }
 
   void _changePage(int index) {
