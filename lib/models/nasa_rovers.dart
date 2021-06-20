@@ -83,7 +83,7 @@ class Photos {
 }
   Future<PhotoManifest> getPhotoManifest(String nameOfRover) async {
     
-        final url = Uri.https(NasaApi.apiUrl, NasaApi.pathRoverManifest+nameOfRover , {'api_key': nasa_api_key});
+        final url = Uri.https(NasaApi.apiUrl, NasaApi.pathRoverManifest+nameOfRover , {'api_key': Credentials.nasa_api_key});
     final response = await http.get(url);
     if (response.statusCode == 200) {
      

@@ -5,6 +5,7 @@ import 'package:nasa_app/views/mars_rover.dart';
 import 'package:nasa_app/views/mars_rovers_photo.dart';
 import 'package:nasa_app/views/photo_of_the_day.dart';
 import 'package:flutter/material.dart';
+import 'package:nasa_app/views/weather_at_mars.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 
 void main() {
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
       
        ISSLocalization.routeName: (ctx) => ISSLocalization(),
         MarsRover.routeName: (ctx) => MarsRover(),
+       WeatherAtMars.routeName: (ctx) => WeatherAtMars(),
       // MarsRoverPhoto.routeName: (ctx) => MarsRoverPhoto(),
        Photo.routeName: (ctx) => Photo()
      }

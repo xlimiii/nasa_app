@@ -42,6 +42,13 @@ class MainDrawer extends StatelessWidget {
         Navigator.of(context).pushReplacementNamed('/iss_people');
       },
       ),
+      ListTile(leading: Icon(Icons.wb_sunny, size: 26,), title: Text('Weather at Mars', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold
+      )
+      ),
+        onTap: () {
+          Navigator.of(context).pushReplacementNamed('/weather_at_mars');
+        },
+      ),
     ]
     ));
   }

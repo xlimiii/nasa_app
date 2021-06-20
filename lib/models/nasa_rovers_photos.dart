@@ -102,7 +102,7 @@ class Rover {
 
  Future<List<Photos>> getPhotos(String nameOfRover, String date) async {
     
-        final url = Uri.https(NasaApi.apiUrl, NasaApi.pathRoverPhotos+nameOfRover+'/photos' , {'api_key': nasa_api_key, 'earth_date': date});
+        final url = Uri.https(NasaApi.apiUrl, NasaApi.pathRoverPhotos+nameOfRover+'/photos' , {'api_key': Credentials.nasa_api_key, 'earth_date': date});
     final response = await http.get(url);
     if (response.statusCode == 200) {
      
