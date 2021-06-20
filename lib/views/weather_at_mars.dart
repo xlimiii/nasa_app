@@ -1,6 +1,8 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:nasa_app/models/Welcome.dart';
 import 'package:nasa_app/models/api_nasa.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/models/iss_people.dart';
@@ -10,83 +12,78 @@ import 'package:nasa_app/widgets/main_drawer.dart';
 
 class WeatherAtMars extends StatefulWidget {
   static const routeName = '/weather_at_mars';
+
   @override
   _WeatherAtMars createState() => _WeatherAtMars();
 }
 
 class _WeatherAtMars extends State<WeatherAtMars> {
-  final title = TextEditingController();
-  List<ISSPerson> peopleInSpace = [] ;
-  int _selectedIndex = 0;
+
+  List<Sole> soles = [];
+
   @override
   void initState() {
     super.initState();
+    loadWeatherAtMars();
   }
 
   void loadWeatherAtMars() async {
     await getWeatherManifest().then(
-          (value) => {
-            stderr.writeln(value)
-
-      });
-
+            (value) =>
+        {
+          soles = value.soles});
   }
 
-  void _changePage(int index) {
-    setState(() {
-      _selectedIndex = index;
-      if(_selectedIndex == 0){
-        Navigator.of(context).pushReplacementNamed('/weather_at_mars');
-      }
-      else {
-        Navigator.of(context).pushReplacementNamed('/weather_at_mars');
-      }
-    });
-  }
 
   @override
   void dispose() {
-    title.dispose();
     super.dispose();
   }
 
+  Widget column (String Title, String subtitle) {
+  return Expanded(
+    child: Column(
+      // align the text to the left instead of centered
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text(Title, style: TextStyle(fontSize: 16),),
+        Text(subtitle),
+      ],
+    ),
+  );}
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('weather_at_mars'),
-      ),
+    return Scaffold(appBar: AppBar(
+      title: Text('Weather'),
+    ),
       drawer: MainDrawer(),
-      bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.people),
-              label: 'weather_at_mars',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.pin_drop),
-              label: 'weather_at_mars',
+      body: ListView.builder(
+        itemCount: soles.length,
+        itemBuilder: (context, index) {
+          return Card(
 
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: _changePage),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            for (var i in peopleInSpace)
-              Text(
-                i.name,
-                style: Theme.of(context).textTheme.headline4,
+            child: InkWell(
+              onTap: () {
+                print('tapped');
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: <Widget>[
+                    column('Sol',soles[index].sol),
+                    column('Max \nTemp',soles[index].maxTemp),
+                    column('Min \nTemp',soles[index].minTemp),
+                    column('Sunset',soles[index].sunset),
+                    column('Sunrise',soles[index].sunrise),
+                  ],
+                ),
               ),
-            ElevatedButton(
-              onPressed: loadWeatherAtMars,
-              child: Icon(Icons.people_alt),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
 }
+
