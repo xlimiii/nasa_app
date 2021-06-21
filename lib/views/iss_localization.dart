@@ -107,7 +107,7 @@ class _ISSLocalizationState extends State<ISSLocalization> {
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
             target: _center,
-            zoom: 2,
+            zoom: 6,
 
           ),
         ),
