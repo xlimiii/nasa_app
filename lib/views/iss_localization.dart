@@ -8,48 +8,58 @@ import 'package:flutter/material.dart';
 import 'package:nasa_app/models/iss_position.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 
-
+import 'dart:developer';
 class ISSLocalization extends StatefulWidget {
-    static const routeName = '/iss_loc';
+  static const routeName = '/iss_loc';
+
+
   @override
   _ISSLocalizationState createState() => _ISSLocalizationState();
 }
 
 class _ISSLocalizationState extends State<ISSLocalization> {
   final title = TextEditingController();
-    Completer<GoogleMapController> _controller = Completer();
+  Completer<GoogleMapController> _controller = Completer();
 
-  LatLng _center;
+  LatLng _center= LatLng(0.0,0.0);
   Timer timer;
 
+  GoogleMapController _mapController;
 
 
   void _onMapCreated(GoogleMapController controller) {
+
+    _mapController = controller;
     _controller.complete(controller);
   }
+
   int _selectedIndex = 1;
+
   @override
   void initState() {
     loadISSPosition();
     super.initState();
-    timer = Timer.periodic(Duration(seconds: 1), (Timer t) => loadISSPosition());
+    timer =
+        Timer.periodic(Duration(seconds: 1), (Timer t) => loadISSPosition());
   }
 
   void loadISSPosition() async {
     await getISSPosition().then(
-      (value) => { if (mounted)
-          {setState(() {
-        _center = LatLng(double.parse(value.issPosition.latitude), double.parse(value.issPosition.longitude));
-         
-      })}},
+          (value) =>
+      {
+        setState(() {
+          _center = LatLng(double.parse(value.issPosition.latitude),
+              double.parse(value.issPosition.longitude));
+          if(_mapController!=null){
+          _mapController.moveCamera(CameraUpdate.newLatLng(_center));}
+        })},
     );
-
   }
 
-void _changePage(int index) {
+  void _changePage(int index) {
     setState(() {
       _selectedIndex = index;
-      if(_selectedIndex == 0){
+      if (_selectedIndex == 0) {
         Navigator.of(context).pushReplacementNamed('/iss_people');
       }
       else {
@@ -66,16 +76,18 @@ void _changePage(int index) {
     super.dispose();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
+      appBar: AppBar(
         title: Text('People at ISS'),
       ),
       drawer: MainDrawer(),
-     bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
-             BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.people),
               label: 'People at ISS',
             ),
@@ -87,19 +99,39 @@ void _changePage(int index) {
           ],
           currentIndex: _selectedIndex,
           onTap: _changePage),
-      body: 
-      _center == null ? Container() :
-GoogleMap(
+      body: Container(child: Stack(children:  [
+        GoogleMap(
           mapType: MapType.normal,
+          rotateGesturesEnabled: false,
+          scrollGesturesEnabled: false,
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
             target: _center,
-            zoom: 6,
-          )),
-         
-        
-    
+            zoom: 2,
+
+          ),
+        ),
+        Center(child:Card(
+          color: Colors.grey,
+          shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(60),
+      // if you need this
+          side: BorderSide(
+          color: Colors.grey.withOpacity(0.2),
+          width: 1.5,
+        ),
+          ),
+              child: Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  width: 30,
+),
+    ),),
+      ]
+
+    ),
+    ),
     );
-  }
+    }
 }
  
