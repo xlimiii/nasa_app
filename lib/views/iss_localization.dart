@@ -94,7 +94,7 @@ GoogleMap(
           onMapCreated: _onMapCreated,
           initialCameraPosition: CameraPosition(
             target: _center,
-            zoom: 2,
+            zoom: 6,
           )),
          
         
