@@ -40,8 +40,9 @@ class _WeatherAtMars extends State<WeatherAtMars> {
 
   Widget column(String Title, String subtitle) {
     return Expanded(
+
       child: Card(
-        color: Colors.grey,
+        color: Colors.grey[300],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(60),
           // if you need this
@@ -80,26 +81,27 @@ class _WeatherAtMars extends State<WeatherAtMars> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Weather'),
+        actions: <Widget>[
+          Switch(value: true, onChanged: (value) => true),
+        ],
       ),
       drawer: MainDrawer(),
       body: new Container(
-        color: Color(0xff258DED),
         alignment: Alignment.center,
         child: Column(
           children: [
             SliderTheme(
               data: SliderTheme.of(context).copyWith(
-                activeTrackColor: Colors.red[700],
-                inactiveTrackColor: Colors.red[100],
+                activeTrackColor: Theme.of(context).accentColor,
+                inactiveTrackColor: Colors.grey[300],
                 trackShape: RoundedRectSliderTrackShape(),
                 trackHeight: 4.0,
                 thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12.0),
-                thumbColor: Colors.redAccent,
-                overlayColor: Colors.red.withAlpha(32),
+                thumbColor: Theme.of(context).accentColor,
+                overlayColor: Theme.of(context).accentColor.withAlpha(32),
                 overlayShape: RoundSliderOverlayShape(overlayRadius: 28.0),
                 tickMarkShape: RoundSliderTickMarkShape(),
-                activeTickMarkColor: Colors.red[700],
-                inactiveTickMarkColor: Colors.red[100],
+
               ),
               child: Slider(
                 value: _value,
@@ -121,6 +123,7 @@ class _WeatherAtMars extends State<WeatherAtMars> {
               itemCount: 4,
               itemBuilder: (context, index) {
                 return Card(
+                  color: Theme.of(context).primaryColorLight,
                   child: InkWell(
                     onTap: () {
                       print('tapped');

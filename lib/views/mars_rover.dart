@@ -64,6 +64,9 @@ void _changePage(int index) {
     return Scaffold(
      appBar: AppBar(
         title: Text('Mars Rovers'),
+        actions: <Widget>[
+          Switch(value: true, onChanged: (value) => true),
+        ],
       ),
       drawer: MainDrawer(),
       // bottomNavigationBar: BottomNavigationBar(

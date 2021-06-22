@@ -37,7 +37,7 @@ void selectRover(BuildContext context){
       
         margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         decoration: BoxDecoration(
-          color: const Color(0xffffff4c),
+          color: Theme.of(context).accentColor,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(

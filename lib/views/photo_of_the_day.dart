@@ -92,6 +92,9 @@ class _PhotoState extends State<Photo> {
     return Scaffold(
       appBar: AppBar(
         title: Text('NASA Photo of the Day'),
+        actions: <Widget>[
+          Switch(value: true, onChanged: (value) => true),
+        ],
       ),
       drawer: MainDrawer(),
       body: SingleChildScrollView(

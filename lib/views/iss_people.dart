@@ -52,6 +52,9 @@ void _changePage(int index) {
     return Scaffold(
        appBar: AppBar(
         title: Text('People at ISS'),
+        actions: <Widget>[
+          Switch(value: true, onChanged: (value) => true),
+        ],
       ),
       drawer: MainDrawer(),
      bottomNavigationBar: BottomNavigationBar(

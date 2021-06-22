@@ -83,22 +83,12 @@ class _MarsRoverPhotoState extends State<MarsRoverPhoto> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Mars Rovers Photos'),
+          actions: <Widget>[
+          Switch(value: true, onChanged: (value) => true),
+        ],
         ),
         drawer: MainDrawer(),
-        // bottomNavigationBar: BottomNavigationBar(
-        //   items: const <BottomNavigationBarItem>[
-        //      BottomNavigationBarItem(
-        //       icon: Icon(Icons.text_snippet_outlined),
-        //       label: 'Info',
-        //     ),
-        //     BottomNavigationBarItem(
-        //       icon: Icon(Icons.photo_camera),
-        //       label: 'Photos',
-
-        //     ),
-        //   ],
-        //   currentIndex: _selectedIndex,
-        //   onTap: _changePage),
+       
         body: new Column(children: <Widget>[
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             Text("${selectedDate.toLocal()}".split(' ')[0]),
