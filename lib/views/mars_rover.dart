@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:nasa_app/models/api_nasa.dart';
 import 'package:flutter/material.dart';
-import 'package:nasa_app/models/nasa_photo_of_the_day.dart';
 import 'package:nasa_app/models/nasa_rovers.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 import 'package:nasa_app/widgets/rover_info.dart';
@@ -18,22 +16,11 @@ class _MarsRoverState extends State<MarsRover> {
   final title = TextEditingController();
   final landingDate = TextEditingController();
   final status = TextEditingController();
-  int _selectedIndex = 0;
   String choosedRover = 'spirit';
   final roverNames = ['spirit', 'opportunity', 'perseverance', 'curiosity'];
    List<PhotoManifest> roverObjects = []; 
 
-void _changePage(int index) {
-    setState(() {
-      _selectedIndex = index;
-      if(_selectedIndex == 0){
-        Navigator.of(context).pushReplacementNamed('/rovers');
-      }
-      else {
-        Navigator.of(context).pushReplacementNamed('/rovers_photo', arguments: choosedRover);
-      }
-    });
-  }
+
 
   @override
   void initState() {

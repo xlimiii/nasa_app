@@ -7,7 +7,6 @@ import 'package:nasa_app/views/mars_rovers_photo.dart';
 import 'package:nasa_app/views/photo_of_the_day.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/views/weather_at_mars.dart';
-import 'package:nasa_app/widgets/main_drawer.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Space FUN',
-      theme: lightTheme(),
+      theme: lightTheme,
       onGenerateRoute: (settings) {
           if (settings.name == MarsRoverPhoto.routeName) {
             final Arguments args = settings.arguments;

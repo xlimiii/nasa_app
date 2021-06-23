@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:nasa_app/arguments.dart';
 import 'package:nasa_app/views/mars_rovers_photo.dart';
 

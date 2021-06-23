@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
-import 'package:nasa_app/models/api_nasa.dart';
 import 'package:flutter/material.dart';
-import 'package:nasa_app/models/nasa_photo_of_the_day.dart';
 import 'package:nasa_app/models/nasa_rovers_photos.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
-import 'package:nasa_app/widgets/rover_info.dart';
 import 'package:nasa_app/widgets/rover_photo_element.dart';
 
 class MarsRoverPhoto extends StatefulWidget {

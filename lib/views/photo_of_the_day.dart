@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:nasa_app/models/api_nasa.dart';
 import 'package:nasa_app/models/nasa_photo_of_the_day.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -102,19 +101,23 @@ class _PhotoState extends State<Photo> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            Text("${selectedDate.toLocal()}".split(' ')[0]),
-            SizedBox(
-              height: 20.0,
-            ),
-            RaisedButton(
+            
+            ElevatedButton(
                 onPressed: () => _selectDate(context),
-                child: Text('Select date'))
+                child:Row( children: <Widget>[
+                Icon(Icons.calendar_today),
+                Text("\t${selectedDate.toLocal()}".split(' ')[0])
+                ]
+                )
+                )
+          
           ]),
-              Text(
-                photo == null ? ' ' : photo.title, 
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              Center(
+
+              Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40),
+        ),
                 child: photo == null ? Container() :
                 (photo.type != "video"
                     ? Image.network(photo.url)
@@ -122,6 +125,10 @@ class _PhotoState extends State<Photo> {
                         controller: _controller,
                         liveUIColor: Colors.amber,
                       ))),
+              ),
+                            Text(
+                photo == null ? ' ' : photo.title, 
+                style: Theme.of(context).textTheme.headline4,
               ),
               ElevatedButton(
                 onPressed: getDescription,
@@ -137,4 +144,5 @@ class _PhotoState extends State<Photo> {
       ),
     );
   }
+  
 }

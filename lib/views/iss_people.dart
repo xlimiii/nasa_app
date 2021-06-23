@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:nasa_app/models/api_nasa.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/models/iss_people.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';

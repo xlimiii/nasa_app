@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:nasa_app/models/api_nasa.dart';
 import 'package:nasa_app/models/credentials.dart';
