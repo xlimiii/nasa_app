@@ -68,6 +68,10 @@ flutter:
    - family:  MyFlutterApp
      fonts:
       - asset: fonts/MyFlutterApp.ttf
+   - family:  'RobotoCondensed'
+     fonts:
+      - asset: fonts/RobotoCondensed-Regular.ttf
+
   # fonts:
   #   - family: Schyler
   #     fonts:

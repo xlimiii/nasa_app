@@ -17,7 +17,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context){
     return AppBar(
       brightness: Brightness.dark,
-        title: Text(title),
+        title: Text(title, style: TextStyle(fontFamily: 'RobotoCondensed',) ,textAlign: TextAlign.center,),
         actions: <Widget>[
           IconButton(icon:EasyDynamicTheme.of(context).themeMode == ThemeMode.dark? sun : moon, 
           onPressed: () =>{ 

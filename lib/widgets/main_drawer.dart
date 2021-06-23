@@ -15,35 +15,33 @@ class MainDrawer extends StatelessWidget {
       padding: EdgeInsets.all(20),
       color: Theme.of(context).accentColor,
       child: Text('Menu', style: TextStyle(
-        fontWeight: FontWeight.w900,
-        fontSize: 30,
-        color: Colors.black
+        fontFamily: 'RobotoCondensed', fontSize: 50
       )
       ),
       ),
       SizedBox(height: 20,),
-      ListTile(leading: Icon(CustomIcon.MyFlutterApp.telescope, size: 30,), title: Text('NASA Photo of the day', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold
+      ListTile(leading: Icon(CustomIcon.MyFlutterApp.telescope, size: 40,), title: Text('NASA Photo of the day', style: TextStyle(fontSize: 20, fontFamily: 'RobotoCondensed'
       )
       ),
      onTap: () {
         Navigator.of(context).pushReplacementNamed('/photos');
       },
       ),
-    ListTile(leading: Icon(CustomIcon.MyFlutterApp.space_rover_2, size: 30,), title: Text('Mars Rovers', style: TextStyle( fontSize: 20, fontWeight: FontWeight.bold
+    ListTile(leading: Icon(CustomIcon.MyFlutterApp.space_rover_2, size: 40,), title: Text('Mars Rovers', style: TextStyle( fontSize: 20,  fontFamily: 'RobotoCondensed'
       )
       ),
       onTap: () {
         Navigator.of(context).pushReplacementNamed('/rovers');
       },
       ),
-       ListTile(leading: Icon(CustomIcon.MyFlutterApp.international_space_station, size: 30), title: Text('People at ISS', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold
+       ListTile(leading: Icon(CustomIcon.MyFlutterApp.international_space_station, size: 40), title: Text('International Space Station', style: TextStyle(fontSize: 20, fontFamily: 'RobotoCondensed'
       )
       ),
       onTap: () {
         Navigator.of(context).pushReplacementNamed('/iss_people');
       },
       ),
-      ListTile(leading: Icon(CustomIcon.MyFlutterApp.mars, size: 30,), title: Text('Weather at Mars', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold
+      ListTile(leading: Icon(CustomIcon.MyFlutterApp.mars, size: 40,), title: Text('Weather at Mars', style: TextStyle(fontSize: 20, fontFamily: 'RobotoCondensed'
       )
       ),
         onTap: () {
