@@ -47,12 +47,13 @@ class _ISSLocalizationState extends State<ISSLocalization> {
     await getISSPosition().then(
           (value) =>
       {
+        if(mounted){
         setState(() {
           _center = LatLng(double.parse(value.issPosition.latitude),
               double.parse(value.issPosition.longitude));
           if(_mapController!=null){
           _mapController.moveCamera(CameraUpdate.newLatLng(_center));}
-        })},
+        })}},
     );
   }
 
