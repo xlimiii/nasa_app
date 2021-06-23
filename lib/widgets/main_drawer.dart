@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nasa_app/style/icons/my_flutter_app_icons.dart' as CustomIcon;
 
 class MainDrawer extends StatelessWidget {
 
@@ -21,28 +22,28 @@ class MainDrawer extends StatelessWidget {
       ),
       ),
       SizedBox(height: 20,),
-      ListTile(leading: Icon(Icons.wb_sunny, size: 26,), title: Text('NASA Photo of the day', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold
+      ListTile(leading: Icon(CustomIcon.MyFlutterApp.telescope, size: 30,), title: Text('NASA Photo of the day', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold
       )
       ),
      onTap: () {
         Navigator.of(context).pushReplacementNamed('/photos');
       },
       ),
-    ListTile(leading: Icon(Icons.wb_sunny, size: 26,), title: Text('Mars Rovers', style: TextStyle( fontSize: 20, fontWeight: FontWeight.bold
+    ListTile(leading: Icon(CustomIcon.MyFlutterApp.space_rover_2, size: 30,), title: Text('Mars Rovers', style: TextStyle( fontSize: 20, fontWeight: FontWeight.bold
       )
       ),
       onTap: () {
         Navigator.of(context).pushReplacementNamed('/rovers');
       },
       ),
-       ListTile(leading: Icon(Icons.wb_sunny, size: 26,), title: Text('People at ISS', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold
+       ListTile(leading: Icon(CustomIcon.MyFlutterApp.international_space_station, size: 30), title: Text('People at ISS', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold
       )
       ),
       onTap: () {
         Navigator.of(context).pushReplacementNamed('/iss_people');
       },
       ),
-      ListTile(leading: Icon(Icons.wb_sunny, size: 26,), title: Text('Weather at Mars', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold
+      ListTile(leading: Icon(CustomIcon.MyFlutterApp.mars, size: 30,), title: Text('Weather at Mars', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold
       )
       ),
         onTap: () {

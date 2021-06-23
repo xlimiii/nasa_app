@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:nasa_app/models/iss_position.dart';
 import 'package:nasa_app/widgets/custom_appbar.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
+import 'package:nasa_app/style/icons/my_flutter_app_icons.dart' as CustomIcon;
+
 
 class ISSLocalization extends StatefulWidget {
   static const routeName = '/iss_loc';
@@ -109,22 +111,7 @@ class _ISSLocalizationState extends State<ISSLocalization> {
 
           ),
         ),
-        Center(child:Card(
-          color: Colors.grey,
-          shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(60),
-      // if you need this
-          side: BorderSide(
-          color: Colors.grey.withOpacity(0.2),
-          width: 1.5,
-        ),
-          ),
-              child: Container(
-                  alignment: Alignment.center,
-                  height: 30,
-                  width: 30,
-),
-    ),),
+        Center(child:Icon(CustomIcon.MyFlutterApp.international_space_station, size: 60, color: Colors.blue[900])),
       ]
 
     ),
