@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/models/iss_position.dart';
+import 'package:nasa_app/widgets/custom_appbar.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 
 class ISSLocalization extends StatefulWidget {
@@ -78,11 +79,8 @@ class _ISSLocalizationState extends State<ISSLocalization> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('People at ISS'),
-         actions: <Widget>[
-          Switch(value: true, onChanged: (value) => true),
-        ],
+      appBar: CustomAppBar(
+       title: "ISS Localization"
       ),
       drawer: MainDrawer(),
       bottomNavigationBar: BottomNavigationBar(

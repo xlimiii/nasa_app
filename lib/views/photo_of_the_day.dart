@@ -1,7 +1,10 @@
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:nasa_app/models/nasa_photo_of_the_day.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:nasa_app/style/themes.dart';
+import 'package:nasa_app/widgets/custom_appbar.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -18,6 +21,7 @@ class _PhotoState extends State<Photo> {
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
   DateTime selectedDate = DateTime.now();
   String formattedDate;
+
   YoutubePlayerController _controller = YoutubePlayerController(
     initialVideoId: '',
     flags: YoutubePlayerFlags(
@@ -89,11 +93,8 @@ class _PhotoState extends State<Photo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('NASA Photo of the Day'),
-        actions: <Widget>[
-          Switch(value: true, onChanged: (value) => true),
-        ],
+      appBar: CustomAppBar(
+       title: "Nasa Photo of the day"
       ),
       drawer: MainDrawer(),
       body: SingleChildScrollView(

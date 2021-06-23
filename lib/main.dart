@@ -1,3 +1,4 @@
+import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:nasa_app/arguments.dart';
 import 'package:nasa_app/style/themes.dart';
 import 'package:nasa_app/views/iss_localization.dart';
@@ -9,7 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:nasa_app/views/weather_at_mars.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(EasyDynamicThemeWidget( 
+      child: MyApp(), 
+    ), );
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Space FUN',
-      theme: lightTheme,
+      theme: lightTheme, 
+      darkTheme: darkTheme, 
+      themeMode: EasyDynamicTheme.of(context).themeMode, 
       onGenerateRoute: (settings) {
           if (settings.name == MarsRoverPhoto.routeName) {
             final Arguments args = settings.arguments;

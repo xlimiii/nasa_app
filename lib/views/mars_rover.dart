@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/models/nasa_rovers.dart';
+import 'package:nasa_app/widgets/custom_appbar.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 import 'package:nasa_app/widgets/rover_info.dart';
 
@@ -49,11 +50,8 @@ class _MarsRoverState extends State<MarsRover> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     appBar: AppBar(
-        title: Text('Mars Rovers'),
-        actions: <Widget>[
-          Switch(value: true, onChanged: (value) => true),
-        ],
+     appBar: CustomAppBar(
+       title: "Mars Rovers"
       ),
       drawer: MainDrawer(),
       // bottomNavigationBar: BottomNavigationBar(

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/models/iss_people.dart';
+import 'package:nasa_app/widgets/custom_appbar.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 
 
@@ -49,11 +50,8 @@ void _changePage(int index) {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(
-        title: Text('People at ISS'),
-        actions: <Widget>[
-          Switch(value: true, onChanged: (value) => true),
-        ],
+       appBar: CustomAppBar(
+       title: "People at ISS"
       ),
       drawer: MainDrawer(),
      bottomNavigationBar: BottomNavigationBar(

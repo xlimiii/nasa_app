@@ -32,13 +32,16 @@ void selectRover(BuildContext context){
         selectRover(context);
       },
       child:
-    Container(
+    Card(
       
         margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-        decoration: BoxDecoration(
-          color: Theme.of(context).accentColor,
-          borderRadius: BorderRadius.circular(12),
-        ),
+        // decoration: BoxDecoration(
+        //   color: Theme.of(context).accentColor,
+        //   borderRadius: BorderRadius.circular(12),
+        // ),
+        shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(15.0),
+  ),
         child: Column(
           children: <Widget>[
             Container(

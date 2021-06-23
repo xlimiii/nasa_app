@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:nasa_app/models/Welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/models/weather_at_mars.dart';
+import 'package:nasa_app/widgets/custom_appbar.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 
 class WeatherAtMars extends StatefulWidget {
@@ -76,11 +77,8 @@ class _WeatherAtMars extends State<WeatherAtMars> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Weather'),
-        actions: <Widget>[
-          Switch(value: true, onChanged: (value) => true),
-        ],
+      appBar:  CustomAppBar(
+       title: "Mars Weather"
       ),
       drawer: MainDrawer(),
       body: new Container(

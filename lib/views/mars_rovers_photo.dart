@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/models/nasa_rovers_photos.dart';
+import 'package:nasa_app/widgets/custom_appbar.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 import 'package:nasa_app/widgets/rover_photo_element.dart';
 
@@ -78,23 +79,22 @@ class _MarsRoverPhotoState extends State<MarsRoverPhoto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Mars Rovers Photos'),
-          actions: <Widget>[
-          Switch(value: true, onChanged: (value) => true),
-        ],
-        ),
+        appBar: CustomAppBar(
+       title: "Mars Rovers Photo"
+      ),
         drawer: MainDrawer(),
        
-        body: new Column(children: <Widget>[
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            Text("${selectedDate.toLocal()}".split(' ')[0]),
-            SizedBox(
-              height: 20.0,
-            ),
-            RaisedButton(
+        body: new Column(children: <Widget>[Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            
+            ElevatedButton(
                 onPressed: () => _selectDate(context),
-                child: Text('Select date'))
+                child:Row( children: <Widget>[
+                Icon(Icons.calendar_today),
+                Text("\t${selectedDate.toLocal()}".split(' ')[0])
+                ]
+                )
+                )
+          
           ]),
           new Expanded(
             child: GridView(

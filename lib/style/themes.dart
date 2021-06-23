@@ -7,14 +7,19 @@ final lightTheme =ThemeData(
     primaryColorLight: Color(0xFF384a6a),
     buttonColor: Color(0xFFf7ce45),
     accentColor: Color(0xFFf7ce45),
-    primarySwatch: Colors.amber // ?
+    primarySwatch: Colors.amber,
+    cardTheme: CardTheme(
+      color: Color(0xFFf7ce45),
+    ),
+     // ?
+     backgroundColor: Colors.red
   );
 
 final darkTheme = ThemeData(
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Color(0xFF111316), //8% primary color i 92% #121212
     primaryColor: Color(0xFF111316),
-    accentColor: Color(0xFF111316),
+    accentColor: Color(0xFFfadb7c),
         buttonColor: Color(0xFFfadb7c),
         primarySwatch: MaterialColor(0xFFfadb7c,  {
       50:  const Color(0xFFfef7df),
@@ -28,5 +33,8 @@ final darkTheme = ThemeData(
       800: const Color(0xFFf58600),
       900: const Color(0xFFf56500),
     }),
+    appBarTheme: AppBarTheme(
+      color: Color(0xFF384a6a)
+    )
 
         );
