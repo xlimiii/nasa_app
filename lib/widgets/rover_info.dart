@@ -36,7 +36,7 @@ void selectRover(BuildContext context){
       
         margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         // decoration: BoxDecoration(
-        //   color: Theme.of(context).accentColor,
+           color: Theme.of(context).primaryColorLight,
         //   borderRadius: BorderRadius.circular(12),
         // ),
         shape: RoundedRectangleBorder(
@@ -49,7 +49,7 @@ void selectRover(BuildContext context){
               child: Row(children: <Widget>[
                 Image.network(
                   'https://image.flaticon.com/icons/png/512/944/944255.png',
-                  width: 120.0,
+                  width: 100.0,
                 ),
                 Container(
                     margin: new EdgeInsets.symmetric(
@@ -61,12 +61,14 @@ void selectRover(BuildContext context){
                             nameOfRover,
                             style: TextStyle(
                               fontFamily: 'Noto Sans CJK SC',
-                              fontSize: 25,
+                              fontSize: 28,
+                                fontWeight: FontWeight.w600, color: Colors.white
                             ),
                           ),
-                          Text("Launch date: " + launchDate),
-                          Text("Landing date: " + landingDate),
-                          Text("Status of mission: " + status),
+                          Text("Launch date: " + launchDate, style: TextStyle( fontSize: 16, color: Colors.white),),
+                          Text("Landing date: " + landingDate, style: TextStyle( fontSize: 16, color: Colors.white),),
+                          Text("Status of mission: " + status, style: TextStyle(fontSize: 16, color: Colors.white),),
+                          Text('Total Photos: ' + totalPhotos, style: TextStyle( fontSize: 16, color: Colors.white),),
                         ]))
               ]),
             ),
@@ -74,10 +76,10 @@ void selectRover(BuildContext context){
               margin:  new EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
               child:
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-              Text('Total Photos: ' + totalPhotos),
-              Text('Last Photo: ' + lastPhoto, textAlign: TextAlign.end,)
+
+                Text('Last Photo: ' + lastPhoto, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w400),)
             ])
             )],
         ), 

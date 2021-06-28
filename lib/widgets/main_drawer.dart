@@ -20,12 +20,18 @@ class MainDrawer extends StatelessWidget {
       ),
       ),
       SizedBox(height: 20,),
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 10.0),
+      ),
       ListTile(leading: Icon(CustomIcon.MyFlutterApp.telescope, size: 40,), title: Text('NASA Photo of the day', style: TextStyle(fontSize: 20, fontFamily: 'RobotoCondensed'
       )
       ),
      onTap: () {
         Navigator.of(context).pushReplacementNamed('/photos');
       },
+      ),
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 10.0),
       ),
     ListTile(leading: Icon(CustomIcon.MyFlutterApp.space_rover_2, size: 40,), title: Text('Mars Rovers', style: TextStyle( fontSize: 20,  fontFamily: 'RobotoCondensed'
       )
@@ -34,12 +40,18 @@ class MainDrawer extends StatelessWidget {
         Navigator.of(context).pushReplacementNamed('/rovers');
       },
       ),
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 10.0),
+      ),
        ListTile(leading: Icon(CustomIcon.MyFlutterApp.international_space_station, size: 40), title: Text('International Space Station', style: TextStyle(fontSize: 20, fontFamily: 'RobotoCondensed'
       )
       ),
       onTap: () {
         Navigator.of(context).pushReplacementNamed('/iss_people');
       },
+      ),
+      Padding(
+        padding: EdgeInsets.symmetric(vertical: 10.0),
       ),
       ListTile(leading: Icon(CustomIcon.MyFlutterApp.mars, size: 40,), title: Text('Weather at Mars', style: TextStyle(fontSize: 20, fontFamily: 'RobotoCondensed'
       )

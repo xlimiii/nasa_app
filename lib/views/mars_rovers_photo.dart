@@ -88,14 +88,16 @@ class _MarsRoverPhotoState extends State<MarsRoverPhoto> {
             
             ElevatedButton(
                 onPressed: () => _selectDate(context),
+                style: ElevatedButton.styleFrom(primary: Theme.of(context).primaryColorLight,),
                 child:Row( children: <Widget>[
-                Icon(Icons.calendar_today),
-                Text("\t${selectedDate.toLocal()}".split(' ')[0])
+                  Icon(Icons.calendar_today_outlined, size: 38, color: Colors.white,),
+
                 ]
                 )
                 )
           
           ]),
+          Text("\t${selectedDate.toLocal()}".split(' ')[0], style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),),
           new Expanded(
             child: GridView(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(

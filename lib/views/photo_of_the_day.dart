@@ -17,6 +17,7 @@ class Photo extends StatefulWidget {
 class _PhotoState extends State<Photo> {
   final description = TextEditingController();
   bool descriptionIsActive = false;
+  bool _visible=false;
   NasaPhotoOfTheDay photo;
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
   DateTime selectedDate = DateTime.now();
@@ -72,12 +73,18 @@ class _PhotoState extends State<Photo> {
   }
 
   void getDescription() async {
+
     if (descriptionIsActive == true) {
-      description.text = " ";
-      descriptionIsActive = false;
+      setState(() {
+        description.text = " ";
+        descriptionIsActive = false;
+        _visible=false;
+      });
+
     } else {
       setState(() {
         description.text = photo.description;
+        _visible=true;
       });
       descriptionIsActive = true;
     }
@@ -105,16 +112,20 @@ class _PhotoState extends State<Photo> {
             
             ElevatedButton(
                 onPressed: () => _selectDate(context),
+                style: ElevatedButton.styleFrom(primary: Theme.of(context).primaryColorLight,),
                 child:Row( children: <Widget>[
-                Icon(Icons.calendar_today),
-                Text("\t${selectedDate.toLocal()}".split(' ')[0])
+                  Icon(Icons.calendar_today_outlined, size: 38, color: Colors.white,),
+
                 ]
-                )
+                ),
+
                 )
           
           ]),
+              Text("\t${selectedDate.toLocal()}".split(' ')[0], style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),),
 
               Container(
+
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40),
@@ -128,12 +139,13 @@ class _PhotoState extends State<Photo> {
                       ))),
               ),
                             Text(
-                photo == null ? ' ' : photo.title, 
+                photo == null ? ' ' : photo.title, textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.headline4,
               ),
               ElevatedButton(
                 onPressed: getDescription,
-                child: Icon(Icons.message_outlined),
+                style: ElevatedButton.styleFrom(primary: Theme.of(context).primaryColorLight,),
+                child: Icon(Icons.more_outlined, color: Colors.white,),
               ),
               Text(
                 description.text,
