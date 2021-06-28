@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:nasa_app/models/api_nasa.dart';
-import 'package:nasa_app/models/credentials.dart';
+import 'package:nasa_app/models/credentials.dart' as Credentials;
 
  class PhotoManifest {
   String name;

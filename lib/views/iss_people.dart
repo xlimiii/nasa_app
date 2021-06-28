@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nasa_app/models/iss_people.dart';
 import 'package:nasa_app/widgets/custom_appbar.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
+import 'package:nasa_app/style/icons/my_flutter_app_icons.dart' as CustomIcon;
 
 
 class ISSPeople extends StatefulWidget {
@@ -18,6 +19,7 @@ class _ISSPeopleState extends State<ISSPeople> {
   @override
   void initState() {
     super.initState();
+    loadISSPeople();
   }
 
   void loadISSPeople() async {
@@ -50,6 +52,7 @@ void _changePage(int index) {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
        appBar: CustomAppBar(
        title: "People at ISS"
       ),
@@ -68,23 +71,51 @@ void _changePage(int index) {
           ],
           currentIndex: _selectedIndex,
           onTap: _changePage),
-      body: Center(
+      body: SingleChildScrollView(child:
+      Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             for (var i in peopleInSpace)
-            Text(
-              i.name,
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            ElevatedButton(
-              onPressed: loadISSPeople,
-              child: Icon(Icons.people_alt),
-            ),
+              Card(
+
+                margin: new EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
+                // decoration: BoxDecoration(
+                color: Theme.of(context).primaryColorLight,
+                //   borderRadius: BorderRadius.circular(12),
+                // ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                      child: Row(children: <Widget>[
+                        Icon(CustomIcon.MyFlutterApp.atronaut, size: 60,),
+                        Container(
+                            margin: new EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 10.0),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    i.name,
+                                    style: TextStyle(
+                                        fontFamily: 'Noto Sans CJK SC',
+                                        fontSize: 28,
+                                        fontWeight: FontWeight.w600, color: Colors.white
+                                    ),
+                                  ),
+                                ]))
+                      ]),
+                    ),
+                    ],
+                ),
+              )
           ],
         ),
       ),
-    );
+    ));
   }
 }
- 
