@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/models/iss_people.dart';
+import 'package:nasa_app/models/screenSizeFunctions.dart';
 import 'package:nasa_app/widgets/custom_appbar.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
 import 'package:nasa_app/style/icons/my_flutter_app_icons.dart' as CustomIcon;

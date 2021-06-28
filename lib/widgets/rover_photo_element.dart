@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:nasa_app/models/screenSizeFunctions.dart';
 
 class RoverPhotoElement extends StatelessWidget {
   

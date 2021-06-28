@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:nasa_app/models/nasa_photo_of_the_day.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:nasa_app/models/screenSizeFunctions.dart';
 import 'package:nasa_app/style/themes.dart';
 import 'package:nasa_app/widgets/custom_appbar.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
@@ -20,7 +21,7 @@ class _PhotoState extends State<Photo> {
   bool _visible=false;
   NasaPhotoOfTheDay photo;
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate = DateTime.now().subtract(Duration(days:1));
   String formattedDate;
 
   YoutubePlayerController _controller = YoutubePlayerController(
@@ -36,8 +37,7 @@ class _PhotoState extends State<Photo> {
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime(1995, 6, 16),
-        lastDate: DateTime(
-            DateTime.now().year, DateTime.now().month, DateTime.now().day));
+        lastDate: DateTime.now());
     if (picked != null && picked != selectedDate)
       setState(() {
         selectedDate = picked;
@@ -122,7 +122,8 @@ class _PhotoState extends State<Photo> {
                 )
           
           ]),
-              Text("\t${selectedDate.toLocal()}".split(' ')[0], style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),),
+              Text("\t${selectedDate.toLocal()}".split(' ')[0], style: TextStyle(fontSize: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+                  dividedBy: 48), fontWeight: FontWeight.w500),),
 
               Container(
 
@@ -140,17 +141,26 @@ class _PhotoState extends State<Photo> {
               ),
                             Text(
                 photo == null ? ' ' : photo.title, textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline4,
+                style: TextStyle(fontSize: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+                    dividedBy: 24), fontWeight: FontWeight.w500),
               ),
               ElevatedButton(
                 onPressed: getDescription,
                 style: ElevatedButton.styleFrom(primary: Theme.of(context).primaryColorLight,),
                 child: Icon(Icons.more_outlined, color: Colors.white,),
               ),
+          Container(
+
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40),
+            ),
+            child:
               Text(
                 description.text,
-                style: Theme.of(context).textTheme.bodyText2,
-              ),
+                style: TextStyle(fontSize: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+                  dividedBy: 48), fontWeight: FontWeight.w500),
+              ),),
             ],
           ),
         ),

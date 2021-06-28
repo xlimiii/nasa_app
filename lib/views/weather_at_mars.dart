@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:nasa_app/models/Welcome.dart';
 import 'package:flutter/material.dart';
+import 'package:nasa_app/models/screenSizeFunctions.dart';
 import 'package:nasa_app/models/weather_at_mars.dart';
 import 'package:nasa_app/widgets/custom_appbar.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
@@ -36,9 +37,10 @@ class _WeatherAtMars extends State<WeatherAtMars> {
     super.dispose();
   }
 
+
+
   Widget column(String Title, String subtitle) {
     return Expanded(
-
       child: Card(
         color: Colors.grey[300],
         shape: RoundedRectangleBorder(
@@ -51,7 +53,8 @@ class _WeatherAtMars extends State<WeatherAtMars> {
         ),
         child: Container(
           width: 50,
-          height: 60,
+          height: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+              dividedBy: 6.5),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -123,8 +126,11 @@ class _WeatherAtMars extends State<WeatherAtMars> {
                     onTap: () {
                       print('tapped');
                     },
+                child: Container(
+                    height: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+                      dividedBy: 6.5),
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(10.0),
                       child:(){ if(soles.length-index-_value.toInt()<soles.length &&soles.length-index-_value.toInt()>0) {return Row(
                         children: <Widget>[
                             column('Sol', soles[soles.length-index-_value.toInt()].sol),
@@ -134,7 +140,7 @@ class _WeatherAtMars extends State<WeatherAtMars> {
                             column('Sunset', soles[soles.length-index-_value.toInt()].sunset),
                         ],
                       );}}()
-                    ),
+                    ),),
                   ),
                 );
               },

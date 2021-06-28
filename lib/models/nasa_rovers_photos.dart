@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:nasa_app/models/api_nasa.dart';
 import 'package:http/http.dart' as http;
 
-import 'credentials.dart' as Credentials;
+import 'credentials.dart';
 
 class Photos {
   int id;

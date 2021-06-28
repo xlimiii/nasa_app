@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/arguments.dart';
+import 'package:nasa_app/models/screenSizeFunctions.dart';
 import 'package:nasa_app/views/mars_rovers_photo.dart';
 
 class RoverInfo extends StatelessWidget {
@@ -10,7 +11,8 @@ class RoverInfo extends StatelessWidget {
       @required this.lastPhoto,
       @required this.status,
       @required this.totalPhotos,
-      @required this.landingDate});
+      @required this.landingDate,
+        @required this.count});
 
   final String nameOfRover;
   final String launchDate;
@@ -18,6 +20,7 @@ class RoverInfo extends StatelessWidget {
   final String status;
   final String totalPhotos;
   final String lastPhoto;
+  final double count;
 
 void selectRover(BuildContext context){
    Navigator.of(context).pushNamed(MarsRoverPhoto.routeName, arguments: Arguments(nameOfRover) ); }
@@ -46,10 +49,16 @@ void selectRover(BuildContext context){
           children: <Widget>[
             Container(
               margin: new EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+              height: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+                  dividedBy: 4),
+
               child: Row(children: <Widget>[
                 Image.network(
                   'https://image.flaticon.com/icons/png/512/944/944255.png',
-                  width: 100.0,
+                  height: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+                      dividedBy: 4),
+                  width: ScreenSizeFunctions.screenWidth(context,
+                      dividedBy: 4),
                 ),
                 Container(
                     margin: new EdgeInsets.symmetric(
@@ -61,14 +70,19 @@ void selectRover(BuildContext context){
                             nameOfRover,
                             style: TextStyle(
                               fontFamily: 'Noto Sans CJK SC',
-                              fontSize: 28,
+                              fontSize:ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+                                dividedBy: 24),
                                 fontWeight: FontWeight.w600, color: Colors.white
                             ),
                           ),
-                          Text("Launch date: " + launchDate, style: TextStyle( fontSize: 16, color: Colors.white),),
-                          Text("Landing date: " + landingDate, style: TextStyle( fontSize: 16, color: Colors.white),),
-                          Text("Status of mission: " + status, style: TextStyle(fontSize: 16, color: Colors.white),),
-                          Text('Total Photos: ' + totalPhotos, style: TextStyle( fontSize: 16, color: Colors.white),),
+                          Text("Launch date: " + launchDate, style: TextStyle( fontSize: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+                              dividedBy: 48), color: Colors.white),),
+                          Text("Landing date: " + landingDate, style: TextStyle( fontSize: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+                              dividedBy: 48), color: Colors.white),),
+                          Text("Status of mission: " + status, style: TextStyle(fontSize: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+                              dividedBy: 48), color: Colors.white),),
+                          Text('Total Photos: ' + totalPhotos, style: TextStyle( fontSize: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+                              dividedBy: 48), color: Colors.white),),
                         ]))
               ]),
             ),
