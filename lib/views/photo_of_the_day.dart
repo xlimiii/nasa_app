@@ -152,8 +152,8 @@ class _PhotoState extends State<Photo> {
                 style: Theme.of(context).textTheme.bodyText1,
                   textAlign: TextAlign.justify,
               ),
-              )],
-          ),
+              ),
+          ]),
         ),
       ),
     );
