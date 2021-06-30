@@ -36,7 +36,7 @@ void selectRover(BuildContext context){
       
         margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         // decoration: BoxDecoration(
-           color: Theme.of(context).primaryColorLight,
+           //color: Theme.of(context).accentColor,
         //   borderRadius: BorderRadius.circular(12),
         // ),
         shape: RoundedRectangleBorder(
@@ -62,13 +62,13 @@ void selectRover(BuildContext context){
                             style: TextStyle(
                               fontFamily: 'Noto Sans CJK SC',
                               fontSize: 28,
-                                fontWeight: FontWeight.w600, color: Colors.white
+                                fontWeight: FontWeight.w600,
                             ),
                           ),
-                          Text("Launch date: " + launchDate, style: TextStyle( fontSize: 16, color: Colors.white),),
-                          Text("Landing date: " + landingDate, style: TextStyle( fontSize: 16, color: Colors.white),),
-                          Text("Status of mission: " + status, style: TextStyle(fontSize: 16, color: Colors.white),),
-                          Text('Total Photos: ' + totalPhotos, style: TextStyle( fontSize: 16, color: Colors.white),),
+                          Text("Launch date: " + launchDate, style: TextStyle( fontSize: 16,),),
+                          Text("Landing date: " + landingDate, style: TextStyle( fontSize: 16,),),
+                          Text("Status of mission: " + status, style: TextStyle(fontSize: 16,),),
+                          Text('Total Photos: ' + totalPhotos, style: TextStyle( fontSize: 16,),),
                         ]))
               ]),
             ),
@@ -79,7 +79,7 @@ void selectRover(BuildContext context){
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
 
-                Text('Last Photo: ' + lastPhoto, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w400),)
+                Text('Last Photo: ' + lastPhoto, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),)
             ])
             )],
         ), 

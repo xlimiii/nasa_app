@@ -147,12 +147,13 @@ class _PhotoState extends State<Photo> {
                 style: ElevatedButton.styleFrom(primary: Theme.of(context).primaryColorLight,),
                 child: Icon(Icons.more_outlined, color: Colors.white,),
               ),
-              Text(
+              Container(padding: EdgeInsets.fromLTRB(25, 10, 25, 30), child:Text(
                 description.text,
-                style: Theme.of(context).textTheme.bodyText2,
+                style: Theme.of(context).textTheme.bodyText1,
+                  textAlign: TextAlign.justify,
               ),
-            ],
-          ),
+              ),
+          ]),
         ),
       ),
     );

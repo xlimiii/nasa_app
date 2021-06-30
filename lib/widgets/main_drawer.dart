@@ -43,7 +43,7 @@ class MainDrawer extends StatelessWidget {
       Padding(
         padding: EdgeInsets.symmetric(vertical: 10.0),
       ),
-       ListTile(leading: Icon(CustomIcon.MyFlutterApp.international_space_station, size: 40), title: Text('International Space Station', style: TextStyle(fontSize: 20, fontFamily: 'RobotoCondensed'
+       ListTile(leading: Icon(CustomIcon.MyFlutterApp.international_space_station, size: 40), title: Text('ISS', style: TextStyle(fontSize: 20, fontFamily: 'RobotoCondensed'
       )
       ),
       onTap: () {
