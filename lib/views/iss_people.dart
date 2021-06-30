@@ -82,7 +82,7 @@ void _changePage(int index) {
 
                 margin: new EdgeInsets.symmetric(horizontal: 25.0, vertical: 5.0),
                 // decoration: BoxDecoration(
-                color: Theme.of(context).primaryColorLight,
+                //color: Theme.of(context).primaryColorLight,
                 //   borderRadius: BorderRadius.circular(12),
                 // ),
                 shape: RoundedRectangleBorder(
@@ -105,7 +105,7 @@ void _changePage(int index) {
                                     style: TextStyle(
                                         fontFamily: 'Noto Sans CJK SC',
                                         fontSize: 28,
-                                        fontWeight: FontWeight.w600, color: Colors.white
+                                        fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                 ]))

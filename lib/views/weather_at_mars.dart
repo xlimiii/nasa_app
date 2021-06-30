@@ -20,6 +20,7 @@ class _WeatherAtMars extends State<WeatherAtMars> {
   double _value = 4;
   double max =10;
 
+
   @override
   void initState() {
     super.initState();
@@ -42,7 +43,7 @@ class _WeatherAtMars extends State<WeatherAtMars> {
   Widget column(String Title, String subtitle) {
     return Expanded(
       child: Card(
-        color: Colors.grey[300],
+        //color: Theme.of(context).accentColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(60),
           // if you need this
@@ -61,12 +62,14 @@ class _WeatherAtMars extends State<WeatherAtMars> {
             children: <Widget>[
               Text(
                 Title,
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16,),
                 textAlign: TextAlign.center,
+
               ),
               Text(
                 subtitle,
                 textAlign: TextAlign.center,
+
               ),
             ],
           ),
@@ -84,7 +87,8 @@ class _WeatherAtMars extends State<WeatherAtMars> {
        title: "Mars Weather"
       ),
       drawer: MainDrawer(),
-      body: new Container(
+      body:SingleChildScrollView(child:
+      new Container(
         alignment: Alignment.center,
         child: Column(
           children: [
@@ -118,9 +122,10 @@ class _WeatherAtMars extends State<WeatherAtMars> {
             ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: 5,
+              itemCount: 4,
               itemBuilder: (context, index) {
                 return Card(
+
                   color: Theme.of(context).primaryColorLight,
                   child: InkWell(
                     onTap: () {
@@ -133,8 +138,8 @@ class _WeatherAtMars extends State<WeatherAtMars> {
                       padding: const EdgeInsets.all(10.0),
                       child:(){ if(soles.length-index-_value.toInt()<soles.length &&soles.length-index-_value.toInt()>0) {return Row(
                         children: <Widget>[
-                            column('Sol', soles[soles.length-index-_value.toInt()].sol),
-                            column('Min \nTemp', soles[soles.length-index-_value.toInt()].minTemp),
+                            column('Sol', soles[soles.length-index-_value.toInt()].sol,),
+                            column('Min \nTemp', soles[soles.length-index-_value.toInt()].minTemp,),
                             column('Max \nTemp', soles[soles.length-index-_value.toInt()].maxTemp),
                             column('Sunrise', soles[soles.length-index-_value.toInt()].sunrise),
                             column('Sunset', soles[soles.length-index-_value.toInt()].sunset),
@@ -148,6 +153,6 @@ class _WeatherAtMars extends State<WeatherAtMars> {
           ],
         ),
       ),
-    );
+    ));
   }
 }

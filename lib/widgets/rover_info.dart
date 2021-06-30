@@ -39,7 +39,7 @@ void selectRover(BuildContext context){
       
         margin: new EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
         // decoration: BoxDecoration(
-           color: Theme.of(context).primaryColorLight,
+           //color: Theme.of(context).accentColor,
         //   borderRadius: BorderRadius.circular(12),
         // ),
         shape: RoundedRectangleBorder(
@@ -83,6 +83,7 @@ void selectRover(BuildContext context){
                               dividedBy: 48), color: Colors.white),),
                           Text('Total Photos: ' + totalPhotos, style: TextStyle( fontSize: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
                               dividedBy: 48), color: Colors.white),),
+
                         ]))
               ]),
             ),
@@ -93,7 +94,7 @@ void selectRover(BuildContext context){
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
 
-                Text('Last Photo: ' + lastPhoto, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.w400),)
+                Text('Last Photo: ' + lastPhoto, textAlign: TextAlign.center, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),)
             ])
             )],
         ), 
