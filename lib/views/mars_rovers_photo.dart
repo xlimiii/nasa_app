@@ -98,6 +98,7 @@ class _MarsRoverPhotoState extends State<MarsRoverPhoto> {
           
           ]),
           Text("\t${selectedDate.toLocal()}".split(' ')[0], style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),),
+          photos.isEmpty ? Text('No photos taken that day from ${widget.marsRoverName} rover', textAlign: TextAlign.center) : 
           new Expanded(
             child: GridView(
               gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -107,6 +108,7 @@ class _MarsRoverPhotoState extends State<MarsRoverPhoto> {
                   mainAxisSpacing: 10),
               children: [
                 for (var i in photos) RoverPhotoElement(i.imgSrc),
+                
               ],
             ),
           )
