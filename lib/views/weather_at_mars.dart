@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:nasa_app/models/Welcome.dart';
 import 'package:flutter/material.dart';
+import 'package:nasa_app/models/credentials.dart';
 import 'package:nasa_app/models/screenSizeFunctions.dart';
 import 'package:nasa_app/models/weather_at_mars.dart';
 import 'package:nasa_app/widgets/custom_appbar.dart';
@@ -19,7 +20,6 @@ class _WeatherAtMars extends State<WeatherAtMars> {
   List<Sole> soles = [];
   double _value = 4;
   double max =10;
-
 
   @override
   void initState() {
@@ -124,12 +124,15 @@ class _WeatherAtMars extends State<WeatherAtMars> {
               shrinkWrap: true,
               itemCount: 4,
               itemBuilder: (context, index) {
-                return Card(
+                return GestureDetector(
+                  child: Card(
 
                   color: Theme.of(context).primaryColorLight,
                   child: InkWell(
-                    onTap: () {
-                      print('tapped');
+                    onTap: () => {
+                      Credentials.currentSole = soles[soles.length-index-_value.toInt()],
+                      Navigator.of(context).pushReplacementNamed('/weather_scope')
+
                     },
                 child: Container(
                     height: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
@@ -147,7 +150,7 @@ class _WeatherAtMars extends State<WeatherAtMars> {
                       );}}()
                     ),),
                   ),
-                );
+                ));
               },
             ),
           ],
