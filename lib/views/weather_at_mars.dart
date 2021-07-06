@@ -3,6 +3,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:nasa_app/models/Welcome.dart';
 import 'package:flutter/material.dart';
+import 'package:nasa_app/models/credentials.dart';
+import 'package:nasa_app/models/screenSizeFunctions.dart';
 import 'package:nasa_app/models/weather_at_mars.dart';
 import 'package:nasa_app/widgets/custom_appbar.dart';
 import 'package:nasa_app/widgets/main_drawer.dart';
@@ -18,7 +20,6 @@ class _WeatherAtMars extends State<WeatherAtMars> {
   List<Sole> soles = [];
   double _value = 4;
   double max =10;
-
 
   @override
   void initState() {
@@ -37,9 +38,10 @@ class _WeatherAtMars extends State<WeatherAtMars> {
     super.dispose();
   }
 
+
+
   Widget column(String Title, String subtitle) {
     return Expanded(
-
       child: Card(
         //color: Theme.of(context).accentColor,
         shape: RoundedRectangleBorder(
@@ -51,8 +53,9 @@ class _WeatherAtMars extends State<WeatherAtMars> {
           ),
         ),
         child: Container(
-          width: 70,
-          height: 70,
+          width: 50,
+          height: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+              dividedBy: 6.5),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -121,15 +124,21 @@ class _WeatherAtMars extends State<WeatherAtMars> {
               shrinkWrap: true,
               itemCount: 4,
               itemBuilder: (context, index) {
-                return Card(
+                return GestureDetector(
+                  child: Card(
 
                   color: Theme.of(context).primaryColorLight,
                   child: InkWell(
-                    onTap: () {
-                      print('tapped');
+                    onTap: () => {
+                      Credentials.currentSole = soles[soles.length-index-_value.toInt()],
+                      Navigator.of(context).pushReplacementNamed('/weather_scope')
+
                     },
+                child: Container(
+                    height: ScreenSizeFunctions.screenHeightExcludingToolbar(context,
+                      dividedBy: 6.5),
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(10.0),
                       child:(){ if(soles.length-index-_value.toInt()<soles.length &&soles.length-index-_value.toInt()>0) {return Row(
                         children: <Widget>[
                             column('Sol', soles[soles.length-index-_value.toInt()].sol,),
@@ -139,9 +148,9 @@ class _WeatherAtMars extends State<WeatherAtMars> {
                             column('Sunset', soles[soles.length-index-_value.toInt()].sunset),
                         ],
                       );}}()
-                    ),
+                    ),),
                   ),
-                );
+                ));
               },
             ),
           ],

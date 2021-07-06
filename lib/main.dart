@@ -8,6 +8,7 @@ import 'package:nasa_app/views/mars_rovers_photo.dart';
 import 'package:nasa_app/views/photo_of_the_day.dart';
 import 'package:flutter/material.dart';
 import 'package:nasa_app/views/weather_at_mars.dart';
+import 'package:nasa_app/views/weather_scope.dart';
 
 void main() {
   runApp(EasyDynamicThemeWidget( 
@@ -41,7 +42,8 @@ class MyApp extends StatelessWidget {
        ISSLocalization.routeName: (ctx) => ISSLocalization(),
        MarsRover.routeName: (ctx) => MarsRover(),
        WeatherAtMars.routeName: (ctx) => WeatherAtMars(),
-       Photo.routeName: (ctx) => Photo()
+       Photo.routeName: (ctx) => Photo(),
+       WeatherScope.routeName: (ctx) => WeatherScope()
      }
     );
   }

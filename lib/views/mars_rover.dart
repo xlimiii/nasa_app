@@ -74,7 +74,7 @@ class _MarsRoverState extends State<MarsRover> {
           children: <Widget>[
             for ( var i in roverObjects )
            
-            RoverInfo(nameOfRover: i.name, landingDate: i.landingDate, lastPhoto: i.maxDate, launchDate: i.launchDate, status: i.status, totalPhotos: i.totalPhotos.toString() ),
+            RoverInfo(nameOfRover: i.name, landingDate: i.landingDate, lastPhoto: i.maxDate, launchDate: i.launchDate, status: i.status, totalPhotos: i.totalPhotos.toString(),count: roverObjects.length.toDouble()),
            
            
           ],
