@@ -54,20 +54,6 @@ class _MarsRoverState extends State<MarsRover> {
        title: "Mars Rovers"
       ),
       drawer: MainDrawer(),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   items: const <BottomNavigationBarItem>[
-      //      BottomNavigationBarItem(
-      //       icon: Icon(Icons.text_snippet_outlined),
-      //       label: 'Info',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.photo_camera),
-      //       label: 'Photos',
-            
-      //     ),
-      //   ],
-      //   currentIndex: _selectedIndex,
-      //   onTap: _changePage),
       body:  SingleChildScrollView(child:Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

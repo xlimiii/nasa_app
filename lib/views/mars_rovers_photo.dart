@@ -80,7 +80,7 @@ class _MarsRoverPhotoState extends State<MarsRoverPhoto> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppBar(
-       title: "Mars Rovers Photo"
+       title: "Photos from ${widget.marsRoverName}"
       ),
         drawer: MainDrawer(),
        
