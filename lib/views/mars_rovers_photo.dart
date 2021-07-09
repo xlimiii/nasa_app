@@ -107,7 +107,7 @@ class _MarsRoverPhotoState extends State<MarsRoverPhoto> {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10),
               children: [
-                for (var i in photos) RoverPhotoElement(i.imgSrc),
+                for (var i in photos) RoverPhotoElement(i.imgSrc, i.camera.fullName, i.sol.toString(), i.earthDate.toString(), i.rover.name),
                 
               ],
             ),

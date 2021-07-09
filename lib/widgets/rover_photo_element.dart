@@ -6,7 +6,12 @@ import 'full_size_image.dart';
 class RoverPhotoElement extends StatelessWidget {
   
   final String url;
-  RoverPhotoElement(this.url);
+  final String camera;
+  final String sol;
+  final String date;
+  final String roverName;
+
+  RoverPhotoElement(this.url, this.camera, this.sol, this.date, this.roverName);
 
   @override 
   Widget build(BuildContext context){
@@ -15,7 +20,7 @@ class RoverPhotoElement extends StatelessWidget {
       child: 
       InkWell(
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => SliderShowFullmages(url:url ,)));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => FullSizeImage(url:url , date: date, sol: sol, roverName: roverName, camera: camera,)));
                 },
                 child: Image.network(url, fit: BoxFit.fill, height: 255,),
               ) ,
